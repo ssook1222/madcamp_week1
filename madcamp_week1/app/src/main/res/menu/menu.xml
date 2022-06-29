@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/contacts"
+        android:enabled="true"
+        android:title="연락처"
+        android:icon="@drawable/contacts"
+        />
+    <item
+        android:id="@+id/photos"
+        android:enabled="true"
+        android:title="갤러리"
+        android:icon="@drawable/photo"
+        />
+    <item
+        android:id="@+id/diary"
+        android:enabled="true"
+        android:title="일기"
+        android:icon="@drawable/diary"
+        />
+</menu>
