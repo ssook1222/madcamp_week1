@@ -14,16 +14,20 @@
         >
 
         <TextView
+            android:elevation="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
             android:text="이름"
+            android:textColor="@color/black"
             android:textSize="22dp"
             android:gravity="center_vertical"
             android:id="@+id/contactName"/>
 
         <TextView
+            android:elevation="10dp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -33,6 +37,8 @@
             android:id="@+id/phoneNumber"/>
 
         <TextView
+            android:elevation="10dp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"

@@ -7,8 +7,10 @@
     tools:context=".ContactsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyceler_view"
+        android:elevation="10dp"
+        android:id="@+id/recyclerView"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
