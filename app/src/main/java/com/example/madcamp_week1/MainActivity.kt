@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         var diaryFragment: DiaryFragment? = null
         var photoFragment: PhotoFragment? = null
 
+        setTheme(R.style.SplashTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
