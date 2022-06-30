@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONArray
+import org.json.JSONTokener
 
 class ContactsFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
@@ -18,8 +20,20 @@ class ContactsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_contacts, container, false)
-//        contactsList.add(Contacts("ssook","010-1111-1111","06/29"))
-//        contactsList.add(Contacts("jylee","010-1201-1201","06/29"))
+
+        if (contactsList.isEmpty()) {
+            val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
+                it.readText()
+            }
+            val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
+            for (i in 0 until contactsJsonArray.length()) {
+                val name = contactsJsonArray.getJSONObject(i).getString("name")
+                val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
+                val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
+                contactsList.add(Contacts(name, phoneNumber, startDate))
+            }
+        }
+
         val contactAdapter = ContactAdapter(contactsList)
 
         recyclerView = rootView.findViewById(R.id.recyclerView!!)as RecyclerView
