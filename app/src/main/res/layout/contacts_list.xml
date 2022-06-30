@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:elevation="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:text="이름"
+            android:textSize="22dp"
+            android:gravity="center_vertical"
+            android:id="@+id/contactName"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="전화번호"
+            android:textSize="18dp"
+            android:gravity="center_vertical"
+            android:id="@+id/phoneNumber"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="추억이 시작된 날짜"
+            android:textSize="18dp"
+            android:gravity="center_vertical"
+            android:id="@+id/startDate"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
