@@ -5,16 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
 class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
     RecyclerView.Adapter<PhotoAdapter.Holder>(){
     interface OnItemClickListener{
-        fun onItemClick(view: View, photos:Photos, pos: Int)
+        fun onImageClick(view: View, photos:Photos, pos: Int)
+        fun onTextClick(view: View, photos:Photos, pos: Int)
     }
     private var listener : OnItemClickListener? = null
     fun setOnItemClickListener(listener: OnItemClickListener){
@@ -28,12 +26,16 @@ class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val photoImage = itemView?.findViewById<ImageButton>(R.id.photoContactImage)
         val photoName = itemView?.findViewById<TextView>(R.id.photoContactName)
+        val photoText = itemView?.findViewById<LinearLayout>(R.id.choice_text)
 
         fun bind (photo: Photos, context: Context) {
             photoImage?.setImageResource(photo.resId)
             photoName?.text = photo.contactName
-            itemView.setOnClickListener{
-                listener?.onItemClick(itemView, photo, adapterPosition)
+            photoImage!!.setOnClickListener{
+                listener?.onImageClick(photoImage, photo, adapterPosition)
+            }
+            photoText!!.setOnClickListener{
+                listener?.onTextClick(photoText, photo, adapterPosition)
             }
         }
     }

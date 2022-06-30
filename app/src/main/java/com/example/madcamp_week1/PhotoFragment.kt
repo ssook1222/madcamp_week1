@@ -17,8 +17,7 @@ import org.json.JSONTokener
 class PhotoFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
     var photosList = arrayListOf<Photos>()
-    var thumbnailButton: ImageButton? = null
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,18 +27,17 @@ class PhotoFragment : Fragment() {
 
         photoAdapter.setOnItemClickListener(object:
         PhotoAdapter.OnItemClickListener{
-            override fun onItemClick(view: View, photos: Photos, pos: Int) {
+            override fun onImageClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ChoicePhotoActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onTextClick(view: View, photos: Photos, pos: Int) {
+                val intent = Intent(activity, ShowPhotoActivity::class.java)
                 startActivity(intent)
             }
         }
         )
-        thumbnailButton = rootView?.findViewById(R.id.photoContactImage)
-        thumbnailButton?.setOnClickListener {
-            println("들어왔어?")
-            val intent = Intent(getActivity(), ChoicePhotoActivity::class.java)
-            startActivity(intent)
-        }
 
         if (photosList.isEmpty()) {
             val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {

@@ -23,29 +23,36 @@
             >
         </ImageButton>
 
-        <TextView
-            android:elevation="10dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:textStyle="bold"
-            android:text="이름"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:id="@+id/photoContactName"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/choice_text"
+            >
+            <TextView
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:id="@+id/photoContactName"/>
+            <TextView
+                android:elevation="10dp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:text="님과의 소중한 기억 모음집입니다."
+                android:textSize="16dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
 
-        <TextView
-            android:elevation="10dp"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:text="님과의 소중한 기억 모음집입니다."
-            android:textSize="16dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_vertical"
-            />
 
         <ImageView
             android:background="@drawable/underline"
