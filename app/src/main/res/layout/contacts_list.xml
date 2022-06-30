@@ -21,7 +21,7 @@
             android:textStyle="bold"
             android:text="이름"
             android:textColor="@color/black"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:gravity="center_vertical"
             android:id="@+id/contactName"/>
 
@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:text="전화번호"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:gravity="center_vertical"
             android:id="@+id/phoneNumber"/>
 
@@ -43,9 +43,19 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:text="추억이 시작된 날짜"
-            android:textSize="18dp"
+            android:textSize="16dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:id="@+id/startDate"/>
+
+        <ImageView
+            android:background="@drawable/underline"
+            android:layout_height="1dp"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            >
+        </ImageView>
 
     </LinearLayout>
 

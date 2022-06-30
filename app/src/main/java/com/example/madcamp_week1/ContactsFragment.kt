@@ -18,8 +18,8 @@ class ContactsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_contacts, container, false)
-        contactsList.add(Contacts("ssook","010-1111-1111","06/29"))
-        contactsList.add(Contacts("jylee","010-1201-1201","06/29"))
+//        contactsList.add(Contacts("ssook","010-1111-1111","06/29"))
+//        contactsList.add(Contacts("jylee","010-1201-1201","06/29"))
         val contactAdapter = ContactAdapter(contactsList)
 
         recyclerView = rootView.findViewById(R.id.recyclerView!!)as RecyclerView

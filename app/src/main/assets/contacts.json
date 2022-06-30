@@ -1,0 +1,17 @@
+[
+  {
+  "name": "ssook",
+  "phoneNumber": "010-1111-1111",
+  "startDate": "2022-06-29"
+  },
+  {
+    "name": "jylee",
+    "phoneNumber": "010-1201-1201",
+    "startDate": "2022-06-29"
+  },
+  {
+    "name": "chitos",
+    "phoneNumber": "010-1234-1234",
+    "startDate": "2022-06-29"
+  }
+]
