@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.container, contactsFragment!!).commit()
 
-        val navigationBarView = findViewById<NavigationBarView>(R.id.menu)
+        var navigationBarView = findViewById<NavigationBarView>(R.id.menu)
+        navigationBarView.itemIconTintList = null
 
         navigationBarView.setOnItemSelectedListener(
             NavigationBarView.OnItemSelectedListener { item ->
