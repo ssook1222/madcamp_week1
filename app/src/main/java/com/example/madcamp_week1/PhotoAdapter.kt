@@ -5,26 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactAdapter(val itemList: ArrayList<Contacts>) :
-    RecyclerView.Adapter<ContactAdapter.Holder>(){
+class PhotoAdapter(val itemList: ArrayList<Photos>) :
+    RecyclerView.Adapter<PhotoAdapter.Holder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.contacts_list, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_list, parent, false)
         return Holder(view)
     }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val contactName = itemView?.findViewById<TextView>(R.id.contactName)
-        val phoneNumber = itemView?.findViewById<TextView>(R.id.phoneNumber)
-        val startDate = itemView?.findViewById<TextView>(R.id.startDate)
+        val photoImage = itemView?.findViewById<ImageView>(R.id.photoContactImage)
+        val photoName = itemView?.findViewById<TextView>(R.id.photoContactName)
 
-        fun bind (contacts: Contacts) {
-            contactName?.text = contacts.contactName
-            phoneNumber?.text = contacts.phoneNumber
-            startDate?.text = contacts.startDate
+
+        fun bind (photo: Photos) {
+            photoImage?.setImageResource(photo.resId)
+            photoName?.text = photo.contactName
         }
     }
 
