@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:elevation="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:elevation="10dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="16dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:id="@+id/diaryDate" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:elevation="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:textStyle="bold"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:gravity=""
+                android:id="@+id/diaryContactName"/>
+
+            <TextView
+                android:elevation="10dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:text="님과 함께한 추억이에요."
+                android:textSize="16dp"
+                android:layout_marginLeft="4dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/diaryImage" />
+
+<!--        <TextView-->
+<!--            android:elevation="10dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:textSize="16dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:id="@+id/diaryText" />-->
+
+        <ImageView
+            android:background="@drawable/underline"
+            android:layout_height="1dp"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

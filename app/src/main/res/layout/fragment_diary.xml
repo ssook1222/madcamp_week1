@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="60dp"
     android:background="@color/white"
     tools:context=".DiaryFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:elevation="10dp"
+        android:id="@+id/diaryRecyclerView"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>
