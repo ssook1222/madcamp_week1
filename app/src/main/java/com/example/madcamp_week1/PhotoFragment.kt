@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
@@ -17,6 +18,7 @@ import org.json.JSONTokener
 class PhotoFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
     var photosList = arrayListOf<Photos>()
+    lateinit var photoFragment: PhotoFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,34 +27,37 @@ class PhotoFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_photo, container, false)
         val photoAdapter = PhotoAdapter(requireContext(),photosList)
 
+        photoFragment = this
+
         photoAdapter.setOnItemClickListener(object:
         PhotoAdapter.OnItemClickListener{
             override fun onImageClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ChoicePhotoActivity::class.java)
                 intent.putExtra("name",photos.contactName)
+                activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.remove(photoFragment)
+                    ?.commit()
                 startActivity(intent)
             }
 
-            override fun onTextClick(view: View, photos: Photos, pos: Int) {
+           override fun onTextClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ShowPhotoActivity::class.java)
                 startActivity(intent)
             }
         }
         )
-
         val sharedPreference = (activity as MainActivity).getSharedPreferences("thumbnail",0)
-        val thumbnail_data = sharedPreference.getInt("save_thumbnail",0)
 
         if (photosList.isEmpty()) {
             val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
                 it.readText()
             }
             val photoJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-
             for (i in 0 until photoJsonArray.length()) {
                 val name = photoJsonArray.getJSONObject(i).getString("name")
                 val thumbnail_data = sharedPreference.getInt(name,0)
-                //sharedpreference가 default면
+
                 if(thumbnail_data==0) {
                     photosList.add(Photos(name, R.drawable.sonagi_logo))
                 }
@@ -61,6 +66,28 @@ class PhotoFragment : Fragment() {
                 }
             }
         }
+
+//        else{
+//            val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
+//                it.readText()
+//            }
+//            val photoJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
+//            for (i in 0 until photoJsonArray.length()) {
+//                val name = photoJsonArray.getJSONObject(i).getString("name")
+//                val thumbnail_data = sharedPreference.getInt(name,0)
+//                //sharedpreference가 default면
+//
+//                if(thumbnail_data == 0){
+//                    photosList.get(i).resId = R.drawable.sonagi_logo
+//                }
+//
+//                else{
+//                    photosList.get(i).resId = thumbnail_data
+//                    photoAdapter.notifyDataSetChanged()
+//                }
+//
+//            }
+//        }
 
         recyclerView = rootView.findViewById(R.id.photoRecyclerView!!)as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -72,5 +99,9 @@ class PhotoFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 }

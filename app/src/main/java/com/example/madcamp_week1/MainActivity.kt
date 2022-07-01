@@ -5,8 +5,12 @@ import android.os.Bundle
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
+    
+    public lateinit var mainActivity:MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        mainActivity=this
 
         var contactsFragment: ContactsFragment? = null
         var diaryFragment: DiaryFragment? = null

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +62,10 @@ class ChoicePhotoActivity : AppCompatActivity() {
                 editor.putInt("${choicePhotosList.get(pos).tag}",choicePhotosList.get(pos).resId)
                 editor.apply()
                 println(choicePhotosList.get(pos).resId)
+
+                val intent = Intent(this@ChoicePhotoActivity, MainActivity::class.java)
+                startActivity(intent)
+
             }
         }
         )
