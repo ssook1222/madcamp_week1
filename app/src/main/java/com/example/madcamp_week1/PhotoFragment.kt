@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONTokener
 
-class PhotoFragment : Fragment() {
+class PhotoFragment : Fragment(){
     lateinit var recyclerView : RecyclerView
     var photosList = arrayListOf<Photos>()
     lateinit var photoFragment: PhotoFragment
@@ -43,6 +43,7 @@ class PhotoFragment : Fragment() {
 
            override fun onTextClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ShowPhotoActivity::class.java)
+                intent.putExtra("name",photos.contactName)
                 startActivity(intent)
             }
         }
@@ -67,41 +68,11 @@ class PhotoFragment : Fragment() {
             }
         }
 
-//        else{
-//            val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
-//                it.readText()
-//            }
-//            val photoJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-//            for (i in 0 until photoJsonArray.length()) {
-//                val name = photoJsonArray.getJSONObject(i).getString("name")
-//                val thumbnail_data = sharedPreference.getInt(name,0)
-//                //sharedpreference가 default면
-//
-//                if(thumbnail_data == 0){
-//                    photosList.get(i).resId = R.drawable.sonagi_logo
-//                }
-//
-//                else{
-//                    photosList.get(i).resId = thumbnail_data
-//                    photoAdapter.notifyDataSetChanged()
-//                }
-//
-//            }
-//        }
-
         recyclerView = rootView.findViewById(R.id.photoRecyclerView!!)as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = photoAdapter
 
         photoAdapter.notifyDataSetChanged()
         return rootView
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 }
