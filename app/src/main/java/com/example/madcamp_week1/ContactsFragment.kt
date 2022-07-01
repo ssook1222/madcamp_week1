@@ -1,10 +1,12 @@
 package com.example.madcamp_week1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
@@ -12,15 +14,19 @@ import org.json.JSONTokener
 
 class ContactsFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
-
     var contactsList = arrayListOf<Contacts>()
+    var addContact:Button ?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_contacts, container, false)
-
+        addContact = rootView?.findViewById(R.id.add_contacts)
+        addContact?.setOnClickListener {
+            val intent = Intent(activity, AddContacts::class.java)
+            startActivity(intent)
+        }
         if (contactsList.isEmpty()) {
             val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
                 it.readText()
