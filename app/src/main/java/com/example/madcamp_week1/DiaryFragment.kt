@@ -1,7 +1,8 @@
 package com.example.madcamp_week1
 
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,19 @@ class DiaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_diary, container, false)
-        val diaryAdapter = DiaryAdapter(diaryList)
+        val diaryAdapter = DiaryAdapter(requireContext(), diaryList)
+
+        diaryAdapter.setOnItemClickListener(object:
+            DiaryAdapter.OnItemClickListener {
+                override fun onTextClick(view: View, diary: Diary, pos: Int) {
+                    val intent = Intent(activity, ShowDiaryActivity::class.java)
+                    println(diary.date)
+                    println(diary.name)
+                    intent.putExtra("date-name", arrayOf(diary.date, diary.name))
+                    startActivity(intent)
+                }
+            }
+        )
 
         if (diaryList.isEmpty()) {
             val diaryJsonString: String = requireActivity().assets.open("diaries.json").bufferedReader().use {
@@ -31,10 +44,10 @@ class DiaryFragment : Fragment() {
             for (i in 0 until diaryJsonArray.length()) {
                 val date = diaryJsonArray.getJSONObject(i).getString("date")
                 val name = diaryJsonArray.getJSONObject(i).getString("name")
-                // val resId = diaryJsonArray.getJSONObject(i).getInt("resId")
-                val text = diaryJsonArray.getJSONObject(i).getString("text")
+                val resId = diaryJsonArray.getJSONObject(i).getInt("resId")
+                val title = diaryJsonArray.getJSONObject(i).getString("title")
 
-                diaryList.add(Diary(date, name, R.drawable.sonagi_logo, text))
+                diaryList.add(Diary(date, name, R.drawable.sonagi_logo, title))
             }
         }
 

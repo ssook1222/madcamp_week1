@@ -61,16 +61,16 @@
             android:layout_marginBottom="10dp"
             android:id="@+id/diaryImage" />
 
-<!--        <TextView-->
-<!--            android:elevation="10dp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:textSize="16dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:id="@+id/diaryText" />-->
+        <TextView
+            android:elevation="10dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="16dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:id="@+id/diaryTitle" />
 
         <ImageView
             android:background="@drawable/underline"
