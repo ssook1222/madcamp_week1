@@ -67,7 +67,6 @@ class ChoicePhotoActivity : AppCompatActivity() {
                 val editor = sharedPreferences.edit()
                 editor.putInt("${choicePhotosList.get(pos).tag}",choicePhotosList.get(pos).resId)
                 editor.apply()
-                println(choicePhotosList.get(pos).resId)
 
                 Toast.makeText(applicationContext, "대표 기억 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show()
 

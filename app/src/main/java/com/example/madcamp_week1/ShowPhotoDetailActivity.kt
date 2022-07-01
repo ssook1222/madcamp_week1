@@ -1,16 +1,14 @@
 package com.example.madcamp_week1
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
-class ShowPhotoActivity : AppCompatActivity() {
-    lateinit var recyclerView : RecyclerView
+class ShowPhotoDetailActivity : AppCompatActivity() {
+
+    var nameView: TextView?=null
+    var imageView: ImageView?=null
     var photosList = arrayListOf<ChoicePhotos>(
         ChoicePhotos(R.drawable.ssook1,"chitos"),
         ChoicePhotos(R.drawable.ssook2,"ssook"),
@@ -34,40 +32,25 @@ class ShowPhotoActivity : AppCompatActivity() {
         ChoicePhotos(R.drawable.jy_lee10,"jylee")
     )
     var choicePhotosList = arrayListOf<ChoicePhotos>()
-    var personName: TextView?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_photo)
-
-        recyclerView = findViewById(R.id.showRecyclerView) as RecyclerView
-        val choicePhotoAdapter = ChoicePhotoAdapter(this, choicePhotosList)
-        val layoutManager = GridLayoutManager(applicationContext,2)
+        setContentView(R.layout.activity_show_photo_detail)
 
         val name = intent.getStringExtra("name")
-        personName = findViewById(R.id.personName)
-        personName?.text = name
+        nameView = findViewById(R.id.photo_with_name)
+        nameView?.text = name
 
         for(i in 0 until photosList.size) {
             if (photosList.get(i).tag == name) { //이름이랑 같은 경우
                 choicePhotosList.add(photosList.get(i)) // 추가
-                choicePhotoAdapter.notifyDataSetChanged()
             }
         }
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = choicePhotoAdapter
 
-        choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener{
-            override fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) {
-                val intent = Intent(this@ShowPhotoActivity, ShowPhotoDetailActivity::class.java)
-                intent.putExtra("name",name)
-                val sharedPreferences = getSharedPreferences("photoDetail",0)
-                val editor = sharedPreferences.edit()
-                editor.putInt("new",pos)
-                editor.apply()
-                //intent.putExtra("image",choicePhotosList.get(pos).resId)
-                startActivity(intent)
-            }
-        })
+        val sharedPreferences = getSharedPreferences("photoDetail",0)
+        val pos = sharedPreferences.getInt("new",0)
+
+        imageView = findViewById(R.id.show_image)
+        imageView?.setImageResource(choicePhotosList.get(pos).resId)
     }
 }
