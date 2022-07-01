@@ -9,6 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePhotos>) :
     RecyclerView.Adapter<ChoicePhotoAdapter.Holder>(){
+    interface OnItemClickListener{
+        fun onItemClick(view: View, choicePhotos:ChoicePhotos, pos: Int) //데이터 세이브
+    }
+    private var listener : ChoicePhotoAdapter.OnItemClickListener? = null
+    fun setOnItemClickListener(listener: ChoicePhotoAdapter.OnItemClickListener){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.choice_photo_list, parent, false)
@@ -20,6 +27,9 @@ class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePho
 
         fun bind (choicePhotos: ChoicePhotos) {
             choicePhotoImage?.setImageResource(choicePhotos.resId)
+            choicePhotoImage!!.setOnClickListener{
+                listener?.onItemClick(choicePhotoImage,choicePhotos,adapterPosition)
+            }
         }
     }
 

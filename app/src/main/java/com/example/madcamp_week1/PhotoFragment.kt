@@ -17,7 +17,7 @@ import org.json.JSONTokener
 class PhotoFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
     var photosList = arrayListOf<Photos>()
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +29,7 @@ class PhotoFragment : Fragment() {
         PhotoAdapter.OnItemClickListener{
             override fun onImageClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ChoicePhotoActivity::class.java)
+                intent.putExtra("name",photos.contactName)
                 startActivity(intent)
             }
 
@@ -39,6 +40,9 @@ class PhotoFragment : Fragment() {
         }
         )
 
+        val sharedPreference = (activity as MainActivity).getSharedPreferences("thumbnail",0)
+        val thumbnail_data = sharedPreference.getInt("save_thumbnail",0)
+
         if (photosList.isEmpty()) {
             val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
                 it.readText()
@@ -47,8 +51,14 @@ class PhotoFragment : Fragment() {
 
             for (i in 0 until photoJsonArray.length()) {
                 val name = photoJsonArray.getJSONObject(i).getString("name")
+                val thumbnail_data = sharedPreference.getInt(name,0)
                 //sharedpreference가 default면
-                photosList.add(Photos(name, R.drawable.sonagi_logo))
+                if(thumbnail_data==0) {
+                    photosList.add(Photos(name, R.drawable.sonagi_logo))
+                }
+                else{
+                    photosList.add(Photos(name, thumbnail_data))
+                }
             }
         }
 
