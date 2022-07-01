@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".DiaryFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:elevation="10dp"
-        android:id="@+id/diaryTitleView"
-        android:textStyle="bold"
-        android:textSize="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:elevation="10dp"
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="wrap_content"
-        android:id="@+id/diaryImageView" />
+        android:layout_width="match_parent" >
 
-    <TextView
-        android:elevation="10dp"
-        android:id="@+id/diaryTextView"
-        android:background="@color/jy_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black" />
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".DiaryFragment">
+
+            <TextView
+                android:elevation="10dp"
+                android:id="@+id/diaryTitleView"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:elevation="10dp"
+                android:id="@+id/diaryImageView"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:elevation="10dp"
+                android:id="@+id/diaryTextView"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

@@ -27,9 +27,7 @@ class DiaryFragment : Fragment() {
             DiaryAdapter.OnItemClickListener {
                 override fun onTextClick(view: View, diary: Diary, pos: Int) {
                     val intent = Intent(activity, ShowDiaryActivity::class.java)
-                    println(diary.date)
-                    println(diary.name)
-                    intent.putExtra("date-name", arrayOf(diary.date, diary.name))
+                    intent.putExtra("diaryData", arrayOf(diary.date, diary.name, diary.resId.toString(), diary.title))
                     startActivity(intent)
                 }
             }
