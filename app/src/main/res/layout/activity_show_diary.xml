@@ -17,30 +17,59 @@
             tools:context=".DiaryFragment">
 
             <TextView
-                android:elevation="10dp"
                 android:id="@+id/diaryTitleView"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="-5dp"
                 android:layout_width="match_parent"
-                android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="28dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/notosans_bold"
+                />
+
+            <TextView
+                android:id="@+id/diaryDateView"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="-40dp"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosans_regular"
+                />
 
             <ImageView
-                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cs_soft_purple"
+                >
+            </ImageView>
+
+            <ImageView
                 android:id="@+id/diaryImageView"
+                android:layout_margin="20dp"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent" />
+                android:layout_width="wrap_content" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/jy_soft_blue"
+                >
+            </ImageView>
 
             <TextView
                 android:elevation="10dp"
                 android:id="@+id/diaryTextView"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textColor="#2C2A2A"
+                android:textSize="16dp" />
 
         </LinearLayout>
 
