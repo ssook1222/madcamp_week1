@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONTokener
+import java.io.File
 
 class ContactsFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
@@ -27,16 +28,23 @@ class ContactsFragment : Fragment() {
             val intent = Intent(activity, AddContacts::class.java)
             startActivity(intent)
         }
-        if (contactsList.isEmpty()) {
-            val contactsJsonString: String = requireActivity().assets.open("contacts.json").bufferedReader().use {
-                it.readText()
-            }
-            val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-            for (i in 0 until contactsJsonArray.length()) {
-                val name = contactsJsonArray.getJSONObject(i).getString("name")
-                val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
-                val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
-                contactsList.add(Contacts(name, phoneNumber, startDate))
+
+        val contactsJsonFile = File(context?.filesDir, "contacts.json")
+        var contactsJsonString = ""
+
+        if (contactsJsonFile.exists()) {
+            contactsJsonString = contactsJsonFile.readText()
+            println("I AM HERE! " + contactsJsonString)
+
+            if (contactsList.size == 0 && contactsJsonString != "") {
+                val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
+                for (i in 0 until contactsJsonArray.length()) {
+                    // Refer to Contacts.kt for correct member names!
+                    val name = contactsJsonArray.getJSONObject(i).getString("contactName")
+                    val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
+                    val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
+                    contactsList.add(Contacts(name, phoneNumber, startDate))
+                }
             }
         }
 
