@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/jy_soft_blue"
+    >
+<android.widget.Button
+    android:elevation="10dp"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:id="@+id/add_diary"
+    android:background="@drawable/add"
+    android:layout_marginBottom="70dp"
+    android:layout_marginRight="10dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    >
+</android.widget.Button>
+
+<androidx.recyclerview.widget.RecyclerView
     android:layout_marginBottom="60dp"
-    android:background="@color/white"
-    tools:context=".DiaryFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:elevation="10dp"
-        android:id="@+id/diaryRecyclerView"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</FrameLayout>
+    android:id="@+id/diaryRecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+</RelativeLayout>
