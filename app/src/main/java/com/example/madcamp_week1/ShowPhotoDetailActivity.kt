@@ -2,10 +2,17 @@ package com.example.madcamp_week1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.TextView
+import kotlin.math.max
+import kotlin.math.min
 
 class ShowPhotoDetailActivity : AppCompatActivity() {
+
+    private var scaleGestureDetector: ScaleGestureDetector? = null
+    private var scaleFactor = 1.0f
 
     var nameView: TextView?=null
     var imageView: ImageView?=null
@@ -33,6 +40,11 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
     )
     var choicePhotosList = arrayListOf<ChoicePhotos>()
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        scaleGestureDetector?.onTouchEvent(event)
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_photo_detail)
@@ -52,5 +64,19 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
 
         imageView = findViewById(R.id.show_image)
         imageView?.setImageResource(choicePhotosList.get(pos).resId)
+        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+    }
+
+    inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            scaleFactor *= scaleGestureDetector.scaleFactor
+
+            // 최소 0.5, 최대 2배
+            scaleFactor = max(0.5f, min(scaleFactor, 2.0f))
+
+            imageView?.scaleX = scaleFactor
+            imageView?.scaleY = scaleFactor
+            return true
+        }
     }
 }
