@@ -11,6 +11,7 @@
         android:id="@+id/contact_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_bold"
         android:text="연락처 추가하기"
         android:textColor="@color/jy_blue"
         android:textSize="22dp"
@@ -38,6 +39,7 @@
         android:id="@+id/phone_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_bold"
         android:layout_marginLeft="20dp"
         android:text="전화번호"
         android:textColor="#555555"
@@ -53,14 +55,16 @@
         android:id="@+id/add_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_regular"
         android:hint="연락처를 입력하세요"
+        android:layout_marginTop="-20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_title"
-        app:layout_constraintVertical_bias="0.01"
+        app:layout_constraintVertical_bias="0.0"
        ></EditText>
 
     <TextView
@@ -69,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="이름"
+        android:fontFamily="@font/notosans_bold"
         android:textColor="#555555"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -83,6 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이름을 입력하세요"
+        android:layout_marginTop="-20dp"
+        android:fontFamily="@font/notosans_regular"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,6 +108,7 @@
         android:textColor="#555555"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:fontFamily="@font/notosans_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="-20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +129,7 @@
         >
         <EditText
             android:id="@+id/add_year"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="만난 년도"
@@ -130,6 +140,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
             android:text="-"
             android:textSize="20dp"
             android:textColor="#555555"
@@ -139,6 +150,7 @@
             android:id="@+id/add_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
             android:hint="만난 월"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -147,6 +159,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
             android:text="-"
             android:textSize="20dp"
             android:textColor="#555555"
@@ -156,6 +169,7 @@
             android:id="@+id/add_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
             android:hint="만난 일"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -164,7 +178,7 @@
     </LinearLayout>
 
     <android.widget.Button
-        android:layout_width="300dp"
+        android:layout_width="280dp"
         android:layout_height="60dp"
         android:background="@drawable/add_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,7 +186,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_layout"
-        app:layout_constraintVertical_bias="0.2"></android.widget.Button>
+        app:layout_constraintVertical_bias="0.3"></android.widget.Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@
         android:drawable="@color/white"/>
     <item>
         <bitmap
-            android:src="@drawable/sonagi_logo"
+            android:src="@drawable/sonagi_logo_small"
             android:gravity="center"/>
     </item>
 </layer-list>

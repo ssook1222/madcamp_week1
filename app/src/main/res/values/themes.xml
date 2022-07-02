@@ -20,4 +20,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="BottomNavbar"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/notosans_regular</item>
+    </style>
+
 </resources>

@@ -4,66 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:elevation="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <ImageButton
-            android:src="@drawable/sonagi_logo"
-            android:layout_height="300dp"
-            android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/photoContactImage"
-            >
-        </ImageButton>
-
+        android:layout_marginBottom="10dp"
+        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="4dp">
         <LinearLayout
+            android:elevation="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/choice_text"
             >
-            <TextView
-                android:elevation="10dp"
+
+            <ImageButton
+                android:src="@drawable/sonagi_logo"
+                android:layout_height="300dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:textStyle="bold"
-                android:text="이름"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:gravity="center_vertical"
-                android:id="@+id/photoContactName"/>
-            <TextView
-                android:elevation="10dp"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:text="님과의 소중한 기억 모음집입니다."
-                android:textSize="16dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
-                />
+                android:id="@+id/photoContactImage"
+                >
+            </ImageButton>
+            <ImageView
+                android:background="@drawable/underline"
+                android:backgroundTint="@color/jy_blue"
+                android:layout_height="1dp"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                >
+            </ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/choice_text"
+                >
+                <TextView
+                    android:elevation="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:textStyle="bold"
+                    android:text="이름"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/notosans_bold"
+                    android:textSize="20dp"
+                    android:layout_marginTop="-10dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/photoContactName"/>
+                <TextView
+                    android:elevation="10dp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:text="님과의 소중한 기억 모음집입니다."
+                    android:fontFamily="@font/notosans_regular"
+                    android:textSize="16dp"
+                    android:layout_marginTop="-20dp"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-
-        <ImageView
-            android:background="@drawable/underline"
-            android:layout_height="1dp"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            >
-        </ImageView>
-
-    </LinearLayout>
 
 
 </RelativeLayout>
