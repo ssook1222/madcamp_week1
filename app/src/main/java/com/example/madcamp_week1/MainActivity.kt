@@ -2,6 +2,7 @@ package com.example.madcamp_week1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.madcamp_week1.contacts.ContactsFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {

@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".ShowPhotoDetailActivity"></activity>
-        <activity android:name=".AddContacts" />
+        <activity
+            android:name=".contacts.ContactsDetailActivity"
+            android:exported="false" />
+        <activity android:name=".ShowPhotoDetailActivity" />
+        <activity android:name=".contacts.ContactsAddActivity" />
         <activity
             android:name=".ShowDiaryActivity"
             android:exported="false" />
