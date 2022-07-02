@@ -33,7 +33,7 @@
             </ImageButton>
             <ImageView
                 android:background="@drawable/underline"
-                android:backgroundTint="@color/jy_blue"
+                android:backgroundTint="@color/cs_purple"
                 android:layout_height="1dp"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="20dp"
