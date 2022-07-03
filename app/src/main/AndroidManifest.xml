@@ -16,14 +16,17 @@
             android:name=".contacts.ContactsDetailActivity"
             android:exported="false" />
         <activity android:name=".ShowPhotoDetailActivity" />
-        <activity android:name=".contacts.ContactsAddActivity" />
         <activity android:name=".AddImageActivity"></activity>
+        <activity android:name=".contacts.ContactsAddActivity"
+            android:noHistory="true"
+            />
         <activity
             android:name=".ShowDiaryActivity"
             android:exported="false" />
         <activity android:name=".ShowPhotoActivity" />
         <activity android:name=".ChoicePhotoActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

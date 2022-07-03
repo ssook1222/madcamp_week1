@@ -80,7 +80,12 @@ class ShowPhotoActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@ShowPhotoActivity, MainActivity::class.java)
+        finishAffinity()
+        startActivity(intent)
     }
 }
