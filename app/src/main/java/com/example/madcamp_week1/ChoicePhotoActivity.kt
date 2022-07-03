@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONArray
+import org.json.JSONTokener
+import java.io.File
 import kotlin.math.max
 
 class ChoicePhotoActivity : AppCompatActivity() {
@@ -32,6 +36,23 @@ class ChoicePhotoActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         personName = findViewById(R.id.personName)
         personName?.text = name
+
+        val imageJsonFile = File(filesDir, "images.json")
+        var imageJsonString = ""
+
+        if (imageJsonFile.exists()) {
+            imageJsonString = imageJsonFile.readText()
+
+            if (photosList.size == 0 && imageJsonString != "") {
+                val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
+                for (i in 0 until photosJsonArray.length()) {
+                    val name = photosJsonArray.getJSONObject(i).getString("contactName")
+                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
+                    val uri = uri_raw.toUri()
+                    photosList.add(ChoicePhotos(uri, name))
+                }
+            }
+        }
 
         for(i in 0 until photosList.size) {
             if (photosList.get(i).tag == name) { //이름이랑 같은 경우
