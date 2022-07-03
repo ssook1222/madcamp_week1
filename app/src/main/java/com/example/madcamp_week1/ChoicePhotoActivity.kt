@@ -14,28 +14,7 @@ import kotlin.math.max
 
 class ChoicePhotoActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
-    var photosList = arrayListOf<ChoicePhotos>(
-        ChoicePhotos(R.drawable.ssook1,"chitos"),
-        ChoicePhotos(R.drawable.ssook2,"ssook"),
-        ChoicePhotos(R.drawable.ssook3,"chitos"),
-        ChoicePhotos(R.drawable.ssook4,"ssook"),
-        ChoicePhotos(R.drawable.ssook5,"ssook"),
-        ChoicePhotos(R.drawable.ssook6,"ssook"),
-        ChoicePhotos(R.drawable.ssook7,"ssook"),
-        ChoicePhotos(R.drawable.ssook8,"ssook"),
-        ChoicePhotos(R.drawable.ssook9,"ssook"),
-        ChoicePhotos(R.drawable.ssook10,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee1,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee2,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee3,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee4,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee5,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee6,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee7,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee8,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee9,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee10,"jylee")
-    )
+    var photosList = arrayListOf<ChoicePhotos>()
     var choicePhotosList = arrayListOf<ChoicePhotos>()
     var personName:TextView?=null
 
@@ -65,7 +44,7 @@ class ChoicePhotoActivity : AppCompatActivity() {
             override fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) {
                 val sharedPreferences = getSharedPreferences("thumbnail",0)
                 val editor = sharedPreferences.edit()
-                editor.putInt("${choicePhotosList.get(pos).tag}",choicePhotosList.get(pos).resId)
+                editor.putString("${choicePhotosList.get(pos).tag}",choicePhotosList.get(pos).uri.toString()) //string으로 넣었으니 uri로 파싱해야 함.
                 editor.apply()
 
                 Toast.makeText(applicationContext, "대표 기억 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show()

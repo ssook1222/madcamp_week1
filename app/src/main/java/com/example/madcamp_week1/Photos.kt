@@ -1,3 +1,5 @@
 package com.example.madcamp_week1
 
-class Photos(val contactName: String, var resId : Int)
+import android.net.Uri
+
+class Photos(val contactName: String?, var uri : Uri?)

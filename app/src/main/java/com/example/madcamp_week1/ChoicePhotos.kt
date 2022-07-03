@@ -1,3 +1,5 @@
 package com.example.madcamp_week1
 
-class ChoicePhotos(val resId : Int, val tag: String)
+import android.net.Uri
+
+class ChoicePhotos(val uri : Uri?, val tag: String?)
