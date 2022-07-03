@@ -6,6 +6,10 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
+import org.json.JSONArray
+import org.json.JSONTokener
+import java.io.File
 import kotlin.math.max
 import kotlin.math.min
 
@@ -16,28 +20,7 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
 
     var nameView: TextView?=null
     var imageView: ImageView?=null
-    var photosList = arrayListOf<ChoicePhotos>(
-        ChoicePhotos(R.drawable.ssook1,"chitos"),
-        ChoicePhotos(R.drawable.ssook2,"ssook"),
-        ChoicePhotos(R.drawable.ssook3,"chitos"),
-        ChoicePhotos(R.drawable.ssook4,"ssook"),
-        ChoicePhotos(R.drawable.ssook5,"ssook"),
-        ChoicePhotos(R.drawable.ssook6,"ssook"),
-        ChoicePhotos(R.drawable.ssook7,"ssook"),
-        ChoicePhotos(R.drawable.ssook8,"ssook"),
-        ChoicePhotos(R.drawable.ssook9,"ssook"),
-        ChoicePhotos(R.drawable.ssook10,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee1,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee2,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee3,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee4,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee5,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee6,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee7,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee8,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee9,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee10,"jylee")
-    )
+    var photosList = arrayListOf<ChoicePhotos>()
     var choicePhotosList = arrayListOf<ChoicePhotos>()
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -48,6 +31,23 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_photo_detail)
+
+        val imageJsonFile = File(filesDir, "images.json")
+        var imageJsonString = ""
+
+        if (imageJsonFile.exists()) {
+            imageJsonString = imageJsonFile.readText()
+
+            if (photosList.size == 0 && imageJsonString != "") {
+                val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
+                for (i in 0 until photosJsonArray.length()) {
+                    val name = photosJsonArray.getJSONObject(i).getString("contactName")
+                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
+                    val uri = uri_raw.toUri()
+                    photosList.add(ChoicePhotos(uri, name))
+                }
+            }
+        }
 
         val name = intent.getStringExtra("name")
         nameView = findViewById(R.id.photo_with_name)
@@ -63,7 +63,7 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
         val pos = sharedPreferences.getInt("new",0)
 
         imageView = findViewById(R.id.show_image)
-        imageView?.setImageResource(choicePhotosList.get(pos).resId)
+        imageView?.setImageURI(choicePhotosList.get(pos).uri)
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
     }
 

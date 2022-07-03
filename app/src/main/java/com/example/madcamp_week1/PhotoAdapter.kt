@@ -1,11 +1,15 @@
 package com.example.madcamp_week1
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
@@ -29,7 +33,13 @@ class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
         val photoText = itemView?.findViewById<LinearLayout>(R.id.choice_text)
 
         fun bind (photo: Photos, context: Context) {
-            photoImage?.setImageResource(photo.resId)
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)  {
+                photoImage?.setImageURI(photo.uri)
+            }
+            else {
+                Toast.makeText(context,"갤러리 접근 권한을 허용해주세요.",Toast.LENGTH_LONG).show()
+            }
+
             photoName?.text = photo.contactName
             photoImage!!.setOnClickListener{
                 listener?.onImageClick(photoImage, photo, adapterPosition)

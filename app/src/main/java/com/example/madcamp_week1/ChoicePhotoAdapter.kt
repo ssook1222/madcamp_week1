@@ -26,7 +26,7 @@ class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePho
         val choicePhotoImage = itemView?.findViewById<ImageView>(R.id.choice_image)
 
         fun bind (choicePhotos: ChoicePhotos) {
-            choicePhotoImage?.setImageResource(choicePhotos.resId)
+            choicePhotoImage?.setImageURI(choicePhotos.uri)
             choicePhotoImage!!.setOnClickListener{
                 listener?.onItemClick(choicePhotoImage,choicePhotos,adapterPosition)
             }

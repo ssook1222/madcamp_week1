@@ -1,62 +1,74 @@
 package com.example.madcamp_week1
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.contacts.Contacts
+import org.json.JSONArray
+import org.json.JSONTokener
+import java.io.File
 
 class ShowPhotoActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
-    var photosList = arrayListOf<ChoicePhotos>(
-        ChoicePhotos(R.drawable.ssook1,"chitos"),
-        ChoicePhotos(R.drawable.ssook2,"ssook"),
-        ChoicePhotos(R.drawable.ssook3,"chitos"),
-        ChoicePhotos(R.drawable.ssook4,"ssook"),
-        ChoicePhotos(R.drawable.ssook5,"ssook"),
-        ChoicePhotos(R.drawable.ssook6,"ssook"),
-        ChoicePhotos(R.drawable.ssook7,"ssook"),
-        ChoicePhotos(R.drawable.ssook8,"ssook"),
-        ChoicePhotos(R.drawable.ssook9,"ssook"),
-        ChoicePhotos(R.drawable.ssook10,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee1,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee2,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee3,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee4,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee5,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee6,"chitos"),
-        ChoicePhotos(R.drawable.jy_lee7,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee8,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee9,"jylee"),
-        ChoicePhotos(R.drawable.jy_lee10,"jylee")
-    )
+    var photosList = arrayListOf<ChoicePhotos>()
     var choicePhotosList = arrayListOf<ChoicePhotos>()
     var personName: TextView?=null
+    var addButton : Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_photo)
 
+        val imageJsonFile = File(filesDir, "images.json")
+        var imageJsonString = ""
+
+        if (imageJsonFile.exists()) {
+            imageJsonString = imageJsonFile.readText()
+
+            if (photosList.size == 0 && imageJsonString != "") {
+                val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
+                for (i in 0 until photosJsonArray.length()) {
+                    val name = photosJsonArray.getJSONObject(i).getString("contactName")
+                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
+                    val uri = uri_raw.toUri()
+                    photosList.add(ChoicePhotos(uri, name))
+                }
+            }
+        }
+
         recyclerView = findViewById(R.id.showRecyclerView) as RecyclerView
-        val choicePhotoAdapter = ChoicePhotoAdapter(this, choicePhotosList)
-        val layoutManager = GridLayoutManager(applicationContext,2)
 
         val name = intent.getStringExtra("name")
         personName = findViewById(R.id.personName)
         personName?.text = name
 
+        addButton = findViewById(R.id.add_image)
+        addButton?.setOnClickListener {
+            val intent = Intent(this@ShowPhotoActivity, AddImageActivity::class.java)
+            intent.putExtra("name",name)
+            startActivity(intent)
+        }
+//        이미지 나오면 업데이트
         for(i in 0 until photosList.size) {
             if (photosList.get(i).tag == name) { //이름이랑 같은 경우
                 choicePhotosList.add(photosList.get(i)) // 추가
-                choicePhotoAdapter.notifyDataSetChanged()
             }
         }
+        val choicePhotoAdapter = ChoicePhotoAdapter(this, choicePhotosList)
+        val layoutManager = GridLayoutManager(applicationContext,2)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = choicePhotoAdapter
 
+//        이미지 나오면 업데이트
         choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener{
             override fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) {
                 val intent = Intent(this@ShowPhotoActivity, ShowPhotoDetailActivity::class.java)
@@ -65,9 +77,10 @@ class ShowPhotoActivity : AppCompatActivity() {
                 val editor = sharedPreferences.edit()
                 editor.putInt("new",pos)
                 editor.apply()
-                //intent.putExtra("image",choicePhotosList.get(pos).resId)
                 startActivity(intent)
             }
         })
+
+
     }
 }

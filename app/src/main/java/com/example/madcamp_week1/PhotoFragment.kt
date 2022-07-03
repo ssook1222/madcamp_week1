@@ -1,19 +1,18 @@
 package com.example.madcamp_week1
 
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONTokener
+
 
 class PhotoFragment : Fragment(){
     lateinit var recyclerView : RecyclerView
@@ -28,6 +27,8 @@ class PhotoFragment : Fragment(){
         val photoAdapter = PhotoAdapter(requireContext(),photosList)
 
         photoFragment = this
+
+        val resources = requireContext()!!.resources
 
         photoAdapter.setOnItemClickListener(object:
         PhotoAdapter.OnItemClickListener{
@@ -57,14 +58,20 @@ class PhotoFragment : Fragment(){
             val photoJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
             for (i in 0 until photoJsonArray.length()) {
                 val name = photoJsonArray.getJSONObject(i).getString("name")
-                val thumbnail_data = sharedPreference.getInt(name,0)
+                // val thumbnail_data = sharedPreference.getString()
 
-                if(thumbnail_data==0) {
-                    photosList.add(Photos(name, R.drawable.sonagi_logo))
-                }
-                else{
-                    photosList.add(Photos(name, thumbnail_data))
-                }
+                photosList.add(Photos(name,Uri.parse(
+                    ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                            resources.getResourcePackageName(R.drawable.sonagi_logo) + '/' +
+                            resources.getResourceTypeName(R.drawable.sonagi_logo) + '/' +
+                            resources.getResourceEntryName(R.drawable.sonagi_logo)
+                )))
+//                if(thumbnail_data==0) {
+//
+//                }
+//                else{
+//
+//                }
             }
         }
 
