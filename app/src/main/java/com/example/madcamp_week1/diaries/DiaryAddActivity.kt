@@ -14,10 +14,11 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
-import com.google.gson.Gson
+import com.google.gson.*
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
+import java.lang.reflect.Type
 
 class DiaryAddActivity : AppCompatActivity() {
     var addDiaryPhotoButton: AppCompatButton? = null
@@ -94,7 +95,9 @@ class DiaryAddActivity : AppCompatActivity() {
         val newDiary = Diary("${newYear}-${newMonth}-${newDay}", newName, newUri, newTitle)
         diaryList.add(newDiary)
 
-        val gson = Gson()
+        val gson = GsonBuilder()
+            .registerTypeAdapter(Diary::class.java, DiaryAdapter(applicationContext, diaryList))
+            .create()
         val newDiaryListJson = gson.toJson(diaryList)
         diaryJsonFile.writeText(newDiaryListJson)
 

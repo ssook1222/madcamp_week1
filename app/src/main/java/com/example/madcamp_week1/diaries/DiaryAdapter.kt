@@ -12,10 +12,15 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonSerializationContext
+import com.google.gson.JsonSerializer
+import java.lang.reflect.Type
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : RecyclerView.Adapter<DiaryAdapter.Holder>() {
+class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : RecyclerView.Adapter<DiaryAdapter.Holder>(), JsonSerializer<Diary> {
 
     interface OnItemClickListener {
         fun onTextClick(view: View, diary: Diary, pos: Int)
@@ -57,5 +62,14 @@ class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : Recyc
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    override fun serialize(src: Diary?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+        val obj = JsonObject()
+        obj.addProperty("date", src?.date)
+        obj.addProperty("name", src?.name)
+        obj.addProperty("uri", src?.uri.toString())
+        obj.addProperty("title", src?.title)
+        return obj
     }
 }
