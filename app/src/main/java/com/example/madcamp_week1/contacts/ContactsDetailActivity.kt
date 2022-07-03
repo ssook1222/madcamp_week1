@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.madcamp_week1.MainActivity
@@ -15,9 +16,12 @@ import org.json.JSONTokener
 import java.io.File
 
 class ContactsDetailActivity : AppCompatActivity() {
-    private lateinit var detailName: TextView
+    private lateinit var detailName2: TextView
+    private lateinit var detailName3: TextView
+    private lateinit var detailName4: TextView
     private lateinit var detailPhone: TextView
     private lateinit var detailDate: TextView
+    private lateinit var finishButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +29,23 @@ class ContactsDetailActivity : AppCompatActivity() {
 
         // data is String[] { contactName, phoneNumber, startDate }
         val data = intent.getStringArrayListExtra("contactDetailData")
-        detailName = findViewById<TextView>(R.id.detailName)
+        detailName2 = findViewById<TextView>(R.id.detailName2)
+        detailName3 = findViewById<TextView>(R.id.detailName3)
+        detailName4 = findViewById<TextView>(R.id.detailName4)
         detailPhone = findViewById<TextView>(R.id.detailPhone)
         detailDate = findViewById<TextView>(R.id.detailDate)
 
-        detailName.text = data?.get(0)  // name
+        detailName2.text = data?.get(0)  // name
+        detailName3.text = data?.get(0)  // name
+        detailName4.text = data?.get(0)  // name
         detailPhone.text = data?.get(1) // phone
         detailDate.text = data?.get(2)  // date
+
+        finishButton = findViewById<Button>(R.id.end_point)
+
+        finishButton?.setOnClickListener {
+            onClickDeleteContactButton(it)
+        }
     }
 
     fun onClickDeleteContactButton(view: View) {
@@ -55,7 +69,7 @@ class ContactsDetailActivity : AppCompatActivity() {
             }
         }
 
-        val contactName = findViewById<TextView>(R.id.detailName).text.toString()
+        val contactName = findViewById<TextView>(R.id.detailName2).text.toString()
         val filterdContactList = contactsList.filter { con -> con.contactName != contactName }
 
         val gson = Gson()
