@@ -11,8 +11,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.Diary
-import com.example.madcamp_week1.DiaryAdapter
+import com.example.madcamp_week1.diaries.Diary
+import com.example.madcamp_week1.diaries.DiaryAdapter
 import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener

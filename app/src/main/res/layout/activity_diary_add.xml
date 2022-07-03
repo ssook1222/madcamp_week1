@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/jy_soft_blue"
+    tools:context=".diaries.DiaryAddActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="누구와의 추억인가요?" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addDiaryName"
+        android:hint="이름을 적으세요" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="언제의 추억인가요?" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="-20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_date"
+        app:layout_constraintVertical_bias="0.01">
+
+        <EditText
+            android:id="@+id/addDiaryYear"
+            android:fontFamily="@font/notosans_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="만난 년도"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:text="-"
+            android:textSize="20dp"
+            android:textColor="#555555" />
+
+        <EditText
+            android:id="@+id/addDiaryMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:hint="만난 월"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:text="-"
+            android:textSize="20dp"
+            android:textColor="#555555" />
+
+        <EditText
+            android:id="@+id/addDiaryDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:hint="만난 일"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제목" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addDiaryTitle"
+        android:hint="제목을 적으세요" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내용" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:id="@+id/addDiaryContent"
+        android:hint="내용을 적으세요" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onClickAddDiaryButton"
+        android:elevation="10dp"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@color/cs_bold_purple"
+        android:layout_gravity="center"
+        android:text="추가" />
+
+</LinearLayout>

@@ -1,11 +1,16 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.diaries
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
+import com.example.madcamp_week1.MainActivity
+import com.example.madcamp_week1.R
+import java.io.File
 
-class ShowDiaryActivity : AppCompatActivity() {
+class DiaryShowActivity : AppCompatActivity() {
     private lateinit var diaryTitleView: TextView
     private lateinit var diaryTextView: TextView
     private lateinit var diaryImageView: ImageView
@@ -20,15 +25,21 @@ class ShowDiaryActivity : AppCompatActivity() {
         diaryImageView = findViewById<ImageView>(R.id.diaryImageView)
         diaryDateView = findViewById<TextView>(R.id.diaryDateView)
 
-        // diaryData is String[] { date, name, resId.toString(), title }
+        // diaryData is String[] { date, name, uri.toString(), title }
         val diaryData = intent.getStringArrayExtra("diaryData") as Array<String>
 
-        val diaryText = applicationContext.assets.open("diaries/" + diaryData[0] + "." + diaryData[1] + ".txt")
-            .bufferedReader().use { it.readText() }
+        val diaryFile = File(filesDir, "${diaryData[3]}.txt")
+        val diaryText = diaryFile.readText()
 
-        diaryTitleView?.text = diaryData[3]
-        diaryImageView?.setImageResource(diaryData[2].toInt())
-        diaryDateView?.text = diaryData[0]
-        diaryTextView?.text = diaryText
+        diaryTitleView.text = diaryData[3]
+        diaryImageView.setImageURI(diaryData[2].toUri())
+        diaryDateView.text = diaryData[0]
+        diaryTextView.text = diaryText
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@DiaryShowActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 }

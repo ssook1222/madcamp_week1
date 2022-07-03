@@ -1,7 +1,8 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.diaries
 
 import android.content.Context
 import android.media.Image
+import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.R
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,7 +42,7 @@ class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : Recyc
             val ymd = diary.date.split("-").map { s -> s.toInt() }
             diaryDate?.text = String.format("%d년 %d월 %d일", ymd[0], ymd[1], ymd[2])
             diaryContactName?.text = diary.name
-            diaryImage?.setImageResource(diary.resId)
+            diaryImage?.setImageURI(diary.uri)
             diaryTitle?.text = diary.title
 
             diaryTitle?.setOnClickListener {
@@ -50,7 +52,7 @@ class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : Recyc
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(itemList[position], context)
+        holder.bind(itemList[position], context)
     }
 
     override fun getItemCount(): Int {

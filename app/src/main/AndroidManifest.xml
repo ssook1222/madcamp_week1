@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.madcamp_week1">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,13 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
         <activity
+            android:name=".diaries.DiaryAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".contacts.ContactsDetailActivity"
             android:exported="false" />
         <activity android:name=".ShowPhotoDetailActivity" />
         <activity android:name=".contacts.ContactsAddActivity" />
-        <activity android:name=".AddImageActivity"></activity>
+        <activity android:name=".AddImageActivity" />
         <activity
-            android:name=".ShowDiaryActivity"
+            android:name=".diaries.DiaryShowActivity"
             android:exported="false" />
         <activity android:name=".ShowPhotoActivity" />
         <activity android:name=".ChoicePhotoActivity" />

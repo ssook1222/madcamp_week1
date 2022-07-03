@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.DiaryAdapter
+import com.example.madcamp_week1.diaries.DiaryAdapter
 import com.example.madcamp_week1.R
 
 class ContactAdapter(val itemList: ArrayList<Contacts>) : RecyclerView.Adapter<ContactAdapter.Holder>(){
