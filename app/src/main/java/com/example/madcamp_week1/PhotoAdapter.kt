@@ -33,12 +33,10 @@ class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
         val photoText = itemView?.findViewById<LinearLayout>(R.id.choice_text)
 
         fun bind (photo: Photos, context: Context) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-            {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)  {
                 photoImage?.setImageURI(photo.uri)
             }
-            else
-            {
+            else {
                 Toast.makeText(context,"갤러리 접근 권한을 허용해주세요.",Toast.LENGTH_LONG).show()
             }
 
