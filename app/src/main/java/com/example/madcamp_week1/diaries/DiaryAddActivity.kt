@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
@@ -17,9 +20,32 @@ import org.json.JSONTokener
 import java.io.File
 
 class DiaryAddActivity : AppCompatActivity() {
+    var addDiaryPhotoButton: AppCompatButton? = null
+    var uri: Uri? = null
+    private var resultLauncher: ActivityResultLauncher<Intent>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diary_add)
+
+        addDiaryPhotoButton = findViewById(R.id.addDiaryPhoto)
+        addDiaryPhotoButton?.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            resultLauncher!!.launch(intent)
+        }
+
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            result -> if (result.resultCode == RESULT_OK) {
+                val intent = result.data
+                val callType = intent!!.getIntExtra("CallType", 0)
+                if (callType == 0) {
+                    uri = intent.data
+                }
+            }
+        }
     }
 
     fun onClickAddDiaryButton(view: View) {
@@ -32,6 +58,8 @@ class DiaryAddActivity : AppCompatActivity() {
 
         val diaryJsonString = diaryJsonFile.readText()
 
+        // construct a json that contains information about
+        // already existing diaries
         if (diaryJsonString.isNotEmpty()) {
             val diaryJsonArray = JSONTokener(diaryJsonString).nextValue() as JSONArray
             for (i in 0 until diaryJsonArray.length()) {
@@ -49,14 +77,19 @@ class DiaryAddActivity : AppCompatActivity() {
         val newName = findViewById<EditText>(R.id.addDiaryName).text.toString()
         val newTitle = findViewById<EditText>(R.id.addDiaryTitle).text.toString()
         val newContent = findViewById<EditText>(R.id.addDiaryContent).text.toString()
-        val newUri = Uri.EMPTY
+        val newUri = this.uri
 
-        for (diary in diaryList) {
-            if (diary.title == newTitle) {
-                Toast.makeText(applicationContext, "중복된 제목입니다.", Toast.LENGTH_SHORT).show()
-                return
-            }
+        if (this.uri == null) {
+            Toast.makeText(applicationContext, "사진을 선택해주세요.", Toast.LENGTH_SHORT).show()
+            return
         }
+
+//        for (diary in diaryList) {
+//            if (diary.title == newTitle) {
+//                Toast.makeText(applicationContext, "중복된 제목입니다.", Toast.LENGTH_SHORT).show()
+//                return
+//            }
+//        }
 
         val newDiary = Diary("${newYear}-${newMonth}-${newDay}", newName, newUri, newTitle)
         diaryList.add(newDiary)

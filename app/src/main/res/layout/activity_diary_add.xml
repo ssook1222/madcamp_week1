@@ -94,6 +94,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="사진" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addDiaryPhoto"
+        android:textColor="@color/white"
+        android:background="@color/jy_blue"
+        android:layout_gravity="center"
+        android:hint="사진 고르기" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="내용" />
 
     <EditText
