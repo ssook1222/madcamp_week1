@@ -18,7 +18,6 @@
         <activity android:name=".ShowPhotoDetailActivity" />
         <activity android:name=".contacts.ContactsAddActivity" />
         <activity android:name=".AddImageActivity"></activity>
-        <activity android:name=".AddTagActivity" />
         <activity
             android:name=".ShowDiaryActivity"
             android:exported="false" />
