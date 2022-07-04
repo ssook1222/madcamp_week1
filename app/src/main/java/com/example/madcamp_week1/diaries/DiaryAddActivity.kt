@@ -2,14 +2,15 @@ package com.example.madcamp_week1.diaries
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import com.example.madcamp_week1.MainActivity
@@ -18,10 +19,13 @@ import com.google.gson.*
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
-import java.lang.reflect.Type
+import java.io.FileNotFoundException
+import java.io.InputStream
+
 
 class DiaryAddActivity : AppCompatActivity() {
     var addDiaryPhotoButton: AppCompatButton? = null
+    var addDiaryButton: AppCompatButton? = null
     var uri: Uri? = null
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
 
@@ -36,6 +40,11 @@ class DiaryAddActivity : AppCompatActivity() {
             resultLauncher!!.launch(intent)
         }
 
+        addDiaryButton = findViewById(R.id.addDiary)
+        addDiaryButton?.setOnClickListener{
+            onClickAddDiaryButton(it)
+        }
+
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
@@ -44,6 +53,15 @@ class DiaryAddActivity : AppCompatActivity() {
                 val callType = intent!!.getIntExtra("CallType", 0)
                 if (callType == 0) {
                     uri = intent.data
+
+                    //버튼 누르면 추가한 이미지로 바로 변경
+                    try{
+                        var ins:InputStream=contentResolver.openInputStream(uri!!)!!
+                        var drawable = Drawable.createFromStream(ins, uri.toString())
+                        addDiaryPhotoButton?.setBackground(drawable)
+                    } catch(e: FileNotFoundException ){
+                        Toast.makeText(this, "이미지가 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
