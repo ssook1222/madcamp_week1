@@ -1,10 +1,10 @@
 package com.example.madcamp_week1
 
-import android.app.Application
 import android.content.Context
+import androidx.core.net.toUri
 import com.example.madcamp_week1.contacts.Contacts
 import com.example.madcamp_week1.diaries.Diary
-import com.example.madcamp_week1.photos.Photos
+import com.example.madcamp_week1.photos.ChoicePhotos
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
@@ -39,11 +39,23 @@ class DataHandler(val context: Context?) {
         contactsJsonFile.writeText(newData)
     }
 
-    fun getPhotosList(): ArrayList<Photos>? {
+    fun getChoicePhotosList(): ArrayList<ChoicePhotos> {
         val imageJsonFile = File(context!!.filesDir, "images.json")
+        var choicePhotosList = ArrayList<ChoicePhotos>()
 
+        if (imageJsonFile.exists()) {
+            val imageJsonString = imageJsonFile.readText()
+            if (imageJsonString.isNotEmpty()) {
+                val imageJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
+                for (i in 0 until imageJsonArray.length()) {
+                    val name = imageJsonArray.getJSONObject(i).getString("contactName")
+                    val uri = imageJsonArray.getJSONObject(i).getString("uri").toUri()
+                    choicePhotosList.add(ChoicePhotos(uri, name))
+                }
+            }
+        }
 
-        return null
+        return choicePhotosList
     }
 
     fun getDiariesList(): ArrayList<Diary>? {

@@ -3,12 +3,14 @@ package com.example.madcamp_week1.photos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import org.json.JSONArray
@@ -17,7 +19,6 @@ import java.io.File
 
 class ShowPhotoActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
-    var photosList = arrayListOf<ChoicePhotos>()
     var choicePhotosList = arrayListOf<ChoicePhotos>()
     var personName: TextView?=null
     var addButton : Button?=null
@@ -26,22 +27,8 @@ class ShowPhotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_photo)
 
-        val imageJsonFile = File(filesDir, "images.json")
-        var imageJsonString = ""
-
-        if (imageJsonFile.exists()) {
-            imageJsonString = imageJsonFile.readText()
-
-            if (photosList.size == 0 && imageJsonString != "") {
-                val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
-                for (i in 0 until photosJsonArray.length()) {
-                    val name = photosJsonArray.getJSONObject(i).getString("contactName")
-                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
-                    val uri = uri_raw.toUri()
-                    photosList.add(ChoicePhotos(uri, name))
-                }
-            }
-        }
+        val dh = DataHandler(applicationContext)
+        choicePhotosList = dh.getChoicePhotosList()
 
         recyclerView = findViewById(R.id.showRecyclerView) as RecyclerView
 
@@ -55,12 +42,9 @@ class ShowPhotoActivity : AppCompatActivity() {
             intent.putExtra("name",name)
             startActivity(intent)
         }
-//        이미지 나오면 업데이트
-        for(i in 0 until photosList.size) {
-            if (photosList.get(i).tag == name) { //이름이랑 같은 경우
-                choicePhotosList.add(photosList.get(i)) // 추가
-            }
-        }
+
+        choicePhotosList = choicePhotosList.filter { photo -> photo.tag == name } as ArrayList<ChoicePhotos>
+
         val choicePhotoAdapter = ChoicePhotoAdapter(this, choicePhotosList)
         val layoutManager = GridLayoutManager(applicationContext,2)
         recyclerView.layoutManager = layoutManager
