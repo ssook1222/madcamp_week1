@@ -19,23 +19,21 @@
             android:name=".contacts.ContactsDetailActivity"
             android:exported="false" />
         <activity android:name=".photos.ShowPhotoDetailActivity" />
-        <activity android:name=".photos.AddImageActivity"></activity>
+        <activity
+            android:name=".photos.AddImageActivity"
+            android:hardwareAccelerated="false" />
         <activity android:name=".contacts.ContactsAddActivity"
-            android:noHistory="true"
-            />
+            android:noHistory="true" />
         <activity
             android:name=".diaries.DiaryShowActivity"
             android:exported="false" />
         <activity android:name=".photos.ShowPhotoActivity" />
         <activity android:name=".photos.ChoicePhotoActivity" />
-        <activity android:name=".MainActivity"
-            >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
