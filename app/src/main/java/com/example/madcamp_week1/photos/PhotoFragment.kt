@@ -37,22 +37,22 @@ class PhotoFragment : Fragment(){
 
         photoAdapter.setOnItemClickListener(object:
             PhotoAdapter.OnItemClickListener {
-            override fun onImageClick(view: View, photos: Photos, pos: Int) {
-                val intent = Intent(activity, ChoicePhotoActivity::class.java)
-                intent.putExtra("name",photos.contactName)
-                activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.remove(photoFragment)
-                    ?.commit()
-                startActivity(intent)
-            }
+                override fun onImageClick(view: View, photos: Photos, pos: Int) {
+                    val intent = Intent(activity, ChoicePhotoActivity::class.java)
+                    intent.putExtra("name",photos.contactName)
+                    activity?.supportFragmentManager
+                        ?.beginTransaction()
+                        ?.remove(photoFragment)
+                        ?.commit()
+                    startActivity(intent)
+                }
 
-           override fun onTextClick(view: View, photos: Photos, pos: Int) {
-                val intent = Intent(activity, ShowPhotoActivity::class.java)
-                intent.putExtra("name",photos.contactName)
-                startActivity(intent)
+               override fun onTextClick(view: View, photos: Photos, pos: Int) {
+                    val intent = Intent(activity, ShowPhotoActivity::class.java)
+                    intent.putExtra("name",photos.contactName)
+                    startActivity(intent)
+                }
             }
-        }
         )
         val sharedPreference = (activity as MainActivity).getSharedPreferences("thumbnail",0)
 
