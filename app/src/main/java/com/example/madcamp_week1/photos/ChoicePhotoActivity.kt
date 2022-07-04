@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import org.json.JSONArray
@@ -36,26 +37,12 @@ class ChoicePhotoActivity : AppCompatActivity() {
         personName = findViewById(R.id.personName)
         personName?.text = name
 
-        val imageJsonFile = File(filesDir, "images.json")
-        var imageJsonString = ""
+        val dh = DataHandler(applicationContext)
+        photosList = dh.getChoicePhotosList()
 
-        if (imageJsonFile.exists()) {
-            imageJsonString = imageJsonFile.readText()
-
-            if (photosList.size == 0 && imageJsonString != "") {
-                val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
-                for (i in 0 until photosJsonArray.length()) {
-                    val name = photosJsonArray.getJSONObject(i).getString("contactName")
-                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
-                    val uri = uri_raw.toUri()
-                    photosList.add(ChoicePhotos(uri, name))
-                }
-            }
-        }
-
-        for(i in 0 until photosList.size) {
-            if (photosList.get(i).tag == name) { //이름이랑 같은 경우
-                choicePhotosList.add(photosList.get(i)) // 추가
+        for (photo in photosList) {
+            if (photo.tag == name) {
+                choicePhotosList.add(photo) // 추가
                 choicePhotoAdapter.notifyDataSetChanged()
             }
         }
@@ -72,8 +59,7 @@ class ChoicePhotoActivity : AppCompatActivity() {
                 val intent = Intent(this@ChoicePhotoActivity, MainActivity::class.java)
                 startActivity(intent)
             }
-        }
-        )
+        })
     }
 
     override fun onBackPressed() {

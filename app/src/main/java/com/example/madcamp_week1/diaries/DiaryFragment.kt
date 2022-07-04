@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.R
-import org.json.JSONArray
-import org.json.JSONTokener
-import java.io.File
 
 class DiaryFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
@@ -26,6 +23,9 @@ class DiaryFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_diary, container, false)
         diaryFragment = this
+
+        val dh = DataHandler(context)
+        diaryList = dh.getDiariesList()
 
         val addDiary = rootView?.findViewById<Button>(R.id.add_diary)
         addDiary?.setOnClickListener {
@@ -47,25 +47,6 @@ class DiaryFragment : Fragment() {
                 }
             }
         )
-
-        val diaryJsonFile = File(context?.filesDir, "diaries.json")
-
-        if (diaryJsonFile.exists()) {
-            val diaryJsonString = diaryJsonFile.readText()
-
-            if (diaryList.size == 0 && diaryJsonString.isNotEmpty()) {
-                val diaryJsonArray = JSONTokener(diaryJsonString).nextValue() as JSONArray
-
-                for (i in 0 until diaryJsonArray.length()) {
-                    val date = diaryJsonArray.getJSONObject(i).getString("date")
-                    val name = diaryJsonArray.getJSONObject(i).getString("name")
-                    val rawUri = diaryJsonArray.getJSONObject(i).getString("uri")
-                    val title = diaryJsonArray.getJSONObject(i).getString("title")
-
-                    diaryList.add(Diary(date, name, rawUri.toUri(), title))
-                }
-            }
-        }
 
         recyclerView = rootView.findViewById(R.id.diaryRecyclerView)as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
