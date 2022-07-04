@@ -1,6 +1,5 @@
 package com.example.madcamp_week1.contacts
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import com.google.gson.Gson
-import org.json.JSONArray
-import org.json.JSONTokener
-import java.io.File
 
 class ContactsDetailActivity : AppCompatActivity() {
     private lateinit var detailName2: TextView
@@ -49,33 +46,16 @@ class ContactsDetailActivity : AppCompatActivity() {
     }
 
     fun onClickDeleteContactButton(view: View) {
-        var contactsList = arrayListOf<Contacts>()
-
-        val contactsJsonFile = File(filesDir, "contacts.json")
-        if (!contactsJsonFile.exists()) {
-            openFileOutput("contacts.json", Context.MODE_PRIVATE)
-        }
-
-        val contactsJsonString: String = contactsJsonFile.readText()
-
-        if (contactsJsonString != "") {
-            val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-            for (i in 0 until contactsJsonArray.length()) {
-                // Refer to Contacts.kt for correct member names!
-                val name = contactsJsonArray.getJSONObject(i).getString("contactName")
-                val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
-                val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
-                contactsList.add(Contacts(name, phoneNumber, startDate))
-            }
-        }
+        val dh = DataHandler(applicationContext)
+        var contactsList = dh.getContactsList()
 
         val contactName = findViewById<TextView>(R.id.detailName2).text.toString()
-        val filterdContactList = contactsList.filter { con -> con.contactName != contactName }
+        val filteredContactList = contactsList.filter { con -> con.contactName != contactName }
 
         val gson = Gson()
-        val newContactsListJson: String = gson.toJson(filterdContactList)
+        val newContactsListJson: String = gson.toJson(filteredContactList)
 
-        contactsJsonFile.writeText(newContactsListJson)
+        dh.writeContactsList(newContactsListJson)
 
         Toast.makeText(applicationContext, "$contactName 삭제했습니다.", Toast.LENGTH_SHORT).show()
 
