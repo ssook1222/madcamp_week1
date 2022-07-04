@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/cs_soft_purple"
     android:layout_marginBottom="60dp"
-    tools:context=".PhotoFragment">
+    tools:context=".photos.PhotoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:elevation="10dp"

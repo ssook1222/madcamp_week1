@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
+import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File

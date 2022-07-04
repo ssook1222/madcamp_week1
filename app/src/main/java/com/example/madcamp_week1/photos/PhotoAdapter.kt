@@ -1,25 +1,22 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.R
 
 class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
     RecyclerView.Adapter<PhotoAdapter.Holder>(){
 
     interface OnItemClickListener{
-        fun onImageClick(view: View, photos:Photos, pos: Int)
-        fun onTextClick(view: View, photos:Photos, pos: Int)
+        fun onImageClick(view: View, photos: Photos, pos: Int)
+        fun onTextClick(view: View, photos: Photos, pos: Int)
     }
     private var listener : OnItemClickListener? = null
     fun setOnItemClickListener(listener: OnItemClickListener){

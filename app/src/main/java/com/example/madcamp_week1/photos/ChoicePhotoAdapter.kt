@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.R
 
 class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePhotos>) :
     RecyclerView.Adapter<ChoicePhotoAdapter.Holder>(){
     interface OnItemClickListener{
-        fun onItemClick(view: View, choicePhotos:ChoicePhotos, pos: Int) //데이터 세이브
+        fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) //데이터 세이브
     }
-    private var listener : ChoicePhotoAdapter.OnItemClickListener? = null
-    fun setOnItemClickListener(listener: ChoicePhotoAdapter.OnItemClickListener){
+    private var listener : OnItemClickListener? = null
+    fun setOnItemClickListener(listener: OnItemClickListener){
         this.listener = listener
     }
 

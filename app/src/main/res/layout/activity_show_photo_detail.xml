@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ShowPhotoDetailActivity">
+    tools:context=".photos.ShowPhotoDetailActivity">
 
     <LinearLayout
         android:id="@+id/underline_point"

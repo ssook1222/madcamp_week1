@@ -1,18 +1,16 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.contacts.Contacts
+import com.example.madcamp_week1.MainActivity
+import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
@@ -69,7 +67,7 @@ class ShowPhotoActivity : AppCompatActivity() {
         recyclerView.adapter = choicePhotoAdapter
 
 //        이미지 나오면 업데이트
-        choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener{
+        choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener {
             override fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) {
                 val intent = Intent(this@ShowPhotoActivity, ShowPhotoDetailActivity::class.java)
                 intent.putExtra("name",name)

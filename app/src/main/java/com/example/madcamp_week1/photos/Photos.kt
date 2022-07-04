@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.net.Uri
 

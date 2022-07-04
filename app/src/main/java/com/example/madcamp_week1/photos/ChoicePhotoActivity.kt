@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,14 +7,13 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.net.toUri
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.MainActivity
+import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
-import kotlin.math.max
 
 class ChoicePhotoActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
@@ -61,7 +60,7 @@ class ChoicePhotoActivity : AppCompatActivity() {
             }
         }
 
-        choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener{
+        choicePhotoAdapter.setOnItemClickListener(object : ChoicePhotoAdapter.OnItemClickListener {
             override fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) {
                 val sharedPreferences = getSharedPreferences("thumbnail",0)
                 val editor = sharedPreferences.edit()

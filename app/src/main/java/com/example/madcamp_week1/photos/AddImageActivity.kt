@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.Manifest
 import android.content.Context
@@ -10,7 +10,6 @@ import android.os.Bundle
 import com.google.gson.Gson
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -18,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File

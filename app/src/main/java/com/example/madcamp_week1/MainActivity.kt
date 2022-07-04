@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.madcamp_week1.contacts.ContactsFragment
 import com.example.madcamp_week1.diaries.DiaryFragment
+import com.example.madcamp_week1.photos.PhotoFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {

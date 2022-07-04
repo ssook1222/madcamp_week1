@@ -1,4 +1,4 @@
-package com.example.madcamp_week1
+package com.example.madcamp_week1.photos
 
 import android.content.ContentResolver
 import android.content.Intent
@@ -11,7 +11,8 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.contacts.Contacts
+import com.example.madcamp_week1.MainActivity
+import com.example.madcamp_week1.R
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.File
@@ -34,7 +35,7 @@ class PhotoFragment : Fragment(){
         val resources = requireContext()!!.resources
 
         photoAdapter.setOnItemClickListener(object:
-        PhotoAdapter.OnItemClickListener{
+            PhotoAdapter.OnItemClickListener {
             override fun onImageClick(view: View, photos: Photos, pos: Int) {
                 val intent = Intent(activity, ChoicePhotoActivity::class.java)
                 intent.putExtra("name",photos.contactName)
@@ -65,12 +66,14 @@ class PhotoFragment : Fragment(){
                         val name = contactsJsonArray.getJSONObject(i).getString("contactName")
                         val thumbnail_data = sharedPreference.getString("$name","")
                         if(thumbnail_data==""){
-                            photosList.add(Photos(name,Uri.parse(
+                            photosList.add(
+                                Photos(name,Uri.parse(
                                 ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
                                         resources.getResourcePackageName(R.drawable.sonagi_logo) + '/' +
                                         resources.getResourceTypeName(R.drawable.sonagi_logo) + '/' +
                                         resources.getResourceEntryName(R.drawable.sonagi_logo)
-                            )))
+                            ))
+                            )
                         }
                         else{
                             photosList.add(Photos(name,thumbnail_data?.toUri()))
