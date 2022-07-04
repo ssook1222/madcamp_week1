@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.contacts.ContactAdapter
@@ -117,27 +118,8 @@ class DiaryAddActivity : AppCompatActivity() {
     }
 
     fun onClickAddDiaryButton(view: View) {
-        var diaryList = arrayListOf<Diary>()
-
-        val diaryJsonFile = File(filesDir, "diaries.json")
-        if (!diaryJsonFile.exists()) {
-            openFileOutput("diaries.json", Context.MODE_PRIVATE)
-        }
-
-        val diaryJsonString = diaryJsonFile.readText()
-
-        // construct a json that contains information about
-        // already existing diaries
-        if (diaryJsonString.isNotEmpty()) {
-            val diaryJsonArray = JSONTokener(diaryJsonString).nextValue() as JSONArray
-            for (i in 0 until diaryJsonArray.length()) {
-                val date = diaryJsonArray.getJSONObject(i).getString("date")
-                val name = diaryJsonArray.getJSONObject(i).getString("name")
-                val rawUri = diaryJsonArray.getJSONObject(i).getString("uri")
-                val title = diaryJsonArray.getJSONObject(i).getString("title")
-                diaryList.add(Diary(date, name, rawUri.toUri(), title))
-            }
-        }
+        val dh = DataHandler(applicationContext)
+        val diaryList = dh.getDiariesList()
 
         val newYear = findViewById<EditText>(R.id.addDiaryYear).text.toString()
         val newMonth = findViewById<EditText>(R.id.addDiaryMonth).text.toString()
@@ -146,8 +128,8 @@ class DiaryAddActivity : AppCompatActivity() {
         //이름 선택하면 바뀌게끔 코드 짜야됨
         //val newName = findViewById<EditText>(R.id.addDiaryName).text.toString()
 
-        if (newName==""){
-            Toast.makeText(applicationContext, "이름을 선택해주세요.", Toast.LENGTH_SHORT).show()
+        if (newName.isEmpty() || newName.isBlank()){
+            Toast.makeText(applicationContext, "이름을 적어주세요.", Toast.LENGTH_SHORT).show()
         }
 
         val newTitle = findViewById<EditText>(R.id.addDiaryTitle).text.toString()
@@ -159,21 +141,15 @@ class DiaryAddActivity : AppCompatActivity() {
             return
         }
 
-//        for (diary in diaryList) {
-//            if (diary.title == newTitle) {
-//                Toast.makeText(applicationContext, "중복된 제목입니다.", Toast.LENGTH_SHORT).show()
-//                return
-//            }
-//        }
-
         val newDiary = Diary("${newYear}-${newMonth}-${newDay}", newName, newUri, newTitle)
         diaryList.add(newDiary)
 
         val gson = GsonBuilder()
             .registerTypeAdapter(Diary::class.java, DiaryAdapter(applicationContext, diaryList))
             .create()
+
         val newDiaryListJson = gson.toJson(diaryList)
-        diaryJsonFile.writeText(newDiaryListJson)
+        dh.writeDiariesList(newDiaryListJson)
 
         // create a new txt file that contains diary content
         val newDiaryFile = File(filesDir, "$newTitle.txt")

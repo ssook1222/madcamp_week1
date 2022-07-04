@@ -11,11 +11,11 @@ import java.io.File
 
 class DataHandler(val context: Context?) {
     fun getContactsList(): ArrayList<Contacts> {
-        val contactsJsonFile = File(context!!.filesDir, "contacts.json")
+        val diaryJsonFile = File(context!!.filesDir, "contacts.json")
         var contactsList = ArrayList<Contacts>()
 
-        if (contactsJsonFile.exists()) {
-            val contactsJsonString = contactsJsonFile.readText()
+        if (diaryJsonFile.exists()) {
+            val contactsJsonString = diaryJsonFile.readText()
 
             if (contactsJsonString.isNotEmpty()) {
                 val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
@@ -32,16 +32,16 @@ class DataHandler(val context: Context?) {
     }
 
     fun writeContactsList(newData: String) {
-        val contactsJsonFile = File(context!!.filesDir, "contacts.json")
-        if (!contactsJsonFile.exists()) {
+        val diaryJsonFile = File(context!!.filesDir, "contacts.json")
+        if (!diaryJsonFile.exists()) {
             context.openFileOutput("contacts.json", Context.MODE_PRIVATE)
         }
-        contactsJsonFile.writeText(newData)
+        diaryJsonFile.writeText(newData)
     }
 
     fun getChoicePhotosList(): ArrayList<ChoicePhotos> {
         val imageJsonFile = File(context!!.filesDir, "images.json")
-        var choicePhotosList = ArrayList<ChoicePhotos>()
+        val choicePhotosList = ArrayList<ChoicePhotos>()
 
         if (imageJsonFile.exists()) {
             val imageJsonString = imageJsonFile.readText()
@@ -58,7 +58,30 @@ class DataHandler(val context: Context?) {
         return choicePhotosList
     }
 
-    fun getDiariesList(): ArrayList<Diary>? {
-        return null
+    fun getDiariesList(): ArrayList<Diary> {
+        val diaryJsonFile = File(context!!.filesDir, "diaries.json")
+        val diaryList = ArrayList<Diary>()
+        if (diaryJsonFile.exists()) {
+            val diaryJsonString = diaryJsonFile.readText()
+            if (diaryJsonString.isNotEmpty()) {
+                val diaryJsonArray = JSONTokener(diaryJsonString).nextValue() as JSONArray
+                for (i in 0 until diaryJsonArray.length()) {
+                    val date = diaryJsonArray.getJSONObject(i).getString("date")
+                    val name = diaryJsonArray.getJSONObject(i).getString("name")
+                    val rawUri = diaryJsonArray.getJSONObject(i).getString("uri")
+                    val title = diaryJsonArray.getJSONObject(i).getString("title")
+                    diaryList.add(Diary(date, name, rawUri.toUri(), title))
+                }
+            }
+        }
+        return diaryList
+    }
+
+    fun writeDiariesList(newData: String) {
+        val diaryJsonFile = File(context!!.filesDir, "diaries.json")
+        if (!diaryJsonFile.exists()) {
+            context.openFileOutput("contacts.json", Context.MODE_PRIVATE)
+        }
+        diaryJsonFile.writeText(newData)
     }
 }
