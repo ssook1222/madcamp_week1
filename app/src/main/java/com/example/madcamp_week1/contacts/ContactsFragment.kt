@@ -2,21 +2,19 @@ package com.example.madcamp_week1.contacts
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.diaries.Diary
-import com.example.madcamp_week1.diaries.DiaryAdapter
 import com.example.madcamp_week1.R
+import com.example.madcamp_week1.DataHandler
 import org.json.JSONArray
 import org.json.JSONTokener
-import org.w3c.dom.Text
 import java.io.File
 
 class ContactsFragment : Fragment() {
@@ -39,6 +37,9 @@ class ContactsFragment : Fragment() {
 
         contactsFragment = this
 
+        val dh = DataHandler(context)
+        contactsList = dh.getContactsList()
+
         val contactAdapter = ContactAdapter(contactsList)
         contactAdapter.setOnItemClickListener(object:
             ContactAdapter.OnItemClickListener {
@@ -57,25 +58,7 @@ class ContactsFragment : Fragment() {
             }
         )
 
-        val contactsJsonFile = File(context?.filesDir, "contacts.json")
-        var contactsJsonString = ""
-
-        if (contactsJsonFile.exists()) {
-            contactsJsonString = contactsJsonFile.readText()
-
-            if (contactsList.size == 0 && contactsJsonString != "") {
-                val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-                for (i in 0 until contactsJsonArray.length()) {
-                    // Refer to Contacts.kt for correct member names!
-                    val name = contactsJsonArray.getJSONObject(i).getString("contactName")
-                    val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
-                    val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
-                    contactsList.add(Contacts(name, phoneNumber, startDate))
-                }
-            }
-        }
-
-        recyclerView = rootView.findViewById(R.id.recyclerView!!)as RecyclerView
+        recyclerView = rootView.findViewById(R.id.recyclerView)as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = contactAdapter
 
