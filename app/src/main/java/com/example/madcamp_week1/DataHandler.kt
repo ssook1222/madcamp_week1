@@ -40,6 +40,9 @@ class DataHandler(val context: Context?) {
     }
 
     fun getPhotosList(): ArrayList<Photos>? {
+        val imageJsonFile = File(context!!.filesDir, "images.json")
+
+
         return null
     }
 
