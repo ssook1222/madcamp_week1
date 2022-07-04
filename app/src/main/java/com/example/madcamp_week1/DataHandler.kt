@@ -80,7 +80,7 @@ class DataHandler(val context: Context?) {
     fun writeDiariesList(newData: String) {
         val diaryJsonFile = File(context!!.filesDir, "diaries.json")
         if (!diaryJsonFile.exists()) {
-            context.openFileOutput("contacts.json", Context.MODE_PRIVATE)
+            context.openFileOutput("diaries.json", Context.MODE_PRIVATE)
         }
         diaryJsonFile.writeText(newData)
     }
