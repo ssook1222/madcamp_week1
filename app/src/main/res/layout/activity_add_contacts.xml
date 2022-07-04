@@ -52,6 +52,9 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <EditText
+        android:inputType="phone"
+        android:maxLength="13"
+
         android:id="@+id/add_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,6 +87,7 @@
 
     <EditText
         android:id="@+id/add_name"
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이름을 입력하세요"
@@ -126,7 +130,9 @@
         app:layout_constraintVertical_bias="0.01">
 
         <EditText
+            android:inputType="number"
             android:id="@+id/add_year"
+            android:maxLength="4"
             android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,6 +149,8 @@
             android:textColor="#555555" />
 
         <EditText
+            android:maxLength="2"
+            android:inputType="number"
             android:id="@+id/add_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,6 +168,8 @@
             android:textColor="#555555" />
 
         <EditText
+            android:maxLength="2"
+            android:inputType="number"
             android:id="@+id/add_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

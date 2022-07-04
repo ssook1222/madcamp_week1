@@ -80,6 +80,7 @@
 
                     <EditText
                         android:id="@+id/addDiaryYear"
+                        android:maxLength="4"
                         android:inputType="number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -99,6 +100,8 @@
 
                     <EditText
                         android:id="@+id/addDiaryMonth"
+                        android:inputType="number"
+                        android:maxLength="2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -117,6 +120,8 @@
 
                     <EditText
                         android:id="@+id/addDiaryDay"
+                        android:inputType="number"
+                        android:maxLength="2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
