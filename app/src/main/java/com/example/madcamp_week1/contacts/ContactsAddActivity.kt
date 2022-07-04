@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import com.google.gson.Gson
@@ -21,25 +22,8 @@ class ContactsAddActivity : AppCompatActivity() {
     }
 
     fun onClickAddContactButton(view: View) {
-        var contactsList = arrayListOf<Contacts>()
-
-        val contactsJsonFile = File(filesDir, "contacts.json")
-        if (!contactsJsonFile.exists()) {
-            openFileOutput("contacts.json", Context.MODE_PRIVATE)
-        }
-
-        val contactsJsonString: String = contactsJsonFile.readText()
-
-        if (contactsJsonString != "") {
-            val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
-            for (i in 0 until contactsJsonArray.length()) {
-                // Refer to Contacts.kt for correct member names!
-                val name = contactsJsonArray.getJSONObject(i).getString("contactName")
-                val phoneNumber = contactsJsonArray.getJSONObject(i).getString("phoneNumber")
-                val startDate = contactsJsonArray.getJSONObject(i).getString("startDate")
-                contactsList.add(Contacts(name, phoneNumber, startDate))
-            }
-        }
+        val dh = DataHandler(applicationContext)
+        var contactsList = dh.getContactsList()
 
         val newContactPhone = findViewById<EditText>(R.id.add_phone).text.toString()
         val newContactName = findViewById<EditText>(R.id.add_name).text.toString()
@@ -60,7 +44,7 @@ class ContactsAddActivity : AppCompatActivity() {
         val gson = Gson()
         val newContactsListJson: String = gson.toJson(contactsList)
 
-        contactsJsonFile.writeText(newContactsListJson)
+        dh.writeContactsList(newContactsListJson)
 
         val intent = Intent(this@ContactsAddActivity, MainActivity::class.java)
         startActivity(intent)
