@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="jy_bold_blue">#2191F3</color>
     <color name="jy_blue">#5FADF1</color>
     <color name="jy_soft_blue">#D6ECFF</color>
     <color name="cs_bold_purple">#A874B1</color>
