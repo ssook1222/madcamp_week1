@@ -56,9 +56,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="-10dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:hint="추억을 함께한 사람의 이름을 적어주세요."
+                    android:fontFamily="@font/notosans_regular"
                     android:textSize="14dp"></EditText>
 
                 <ImageView
@@ -154,7 +156,9 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="-10dp"
                     android:hint="추억의 이름은?"
+                    android:fontFamily="@font/notosans_regular"
                     android:textSize="14dp"></EditText>
 
                 <ImageView
@@ -210,6 +214,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/memo_border"
                         android:hint="인연의 일부분을 적어주세요."
+                        android:fontFamily="@font/notosans_regular"
                         android:inputType="textMultiLine"
                         android:textSize="14dp"></EditText>
                 </ScrollView>
