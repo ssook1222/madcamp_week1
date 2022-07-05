@@ -19,10 +19,10 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
     private var scaleGestureDetector: ScaleGestureDetector? = null
     private var scaleFactor = 1.0f
 
-    var nameView: TextView?=null
+    private var nameView: TextView?=null
     var imageView: ImageView?=null
-    var photosList = arrayListOf<ChoicePhotos>()
-    var choicePhotosList = arrayListOf<ChoicePhotos>()
+    private var photosList = arrayListOf<ChoicePhotos>()
+    private var choicePhotosList = arrayListOf<ChoicePhotos>()
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         scaleGestureDetector?.onTouchEvent(event)
@@ -43,8 +43,8 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
                 val photosJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
                 for (i in 0 until photosJsonArray.length()) {
                     val name = photosJsonArray.getJSONObject(i).getString("contactName")
-                    val uri_raw = photosJsonArray.getJSONObject(i).getString("uri")
-                    val uri = uri_raw.toUri()
+                    val uriRaw = photosJsonArray.getJSONObject(i).getString("uri")
+                    val uri = uriRaw.toUri()
                     photosList.add(ChoicePhotos(uri, name))
                 }
             }
@@ -55,8 +55,8 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
         nameView?.text = name
 
         for(i in 0 until photosList.size) {
-            if (photosList.get(i).tag == name) { //이름이랑 같은 경우
-                choicePhotosList.add(photosList.get(i)) // 추가
+            if (photosList[i].tag == name) { //이름이랑 같은 경우
+                choicePhotosList.add(photosList[i]) // 추가
             }
         }
 
@@ -64,7 +64,7 @@ class ShowPhotoDetailActivity : AppCompatActivity() {
         val pos = sharedPreferences.getInt("new",0)
 
         imageView = findViewById(R.id.show_image)
-        imageView?.setImageURI(choicePhotosList.get(pos).uri)
+        imageView?.setImageURI(choicePhotosList[pos].uri)
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
     }
 

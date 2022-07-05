@@ -12,7 +12,7 @@ import java.io.File
 class DataHandler(val context: Context?) {
     fun getContactsList(): ArrayList<Contacts> {
         val diaryJsonFile = File(context!!.filesDir, "contacts.json")
-        var contactsList = ArrayList<Contacts>()
+        val contactsList = ArrayList<Contacts>()
 
         if (diaryJsonFile.exists()) {
             val contactsJsonString = diaryJsonFile.readText()

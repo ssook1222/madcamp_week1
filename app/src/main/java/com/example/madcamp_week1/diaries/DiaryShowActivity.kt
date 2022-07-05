@@ -20,10 +20,10 @@ class DiaryShowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_diary)
 
-        diaryTitleView = findViewById<TextView>(R.id.diaryTitleView)
-        diaryTextView = findViewById<TextView>(R.id.diaryTextView)
-        diaryImageView = findViewById<ImageView>(R.id.diaryImageView)
-        diaryDateView = findViewById<TextView>(R.id.diaryDateView)
+        diaryTitleView = findViewById(R.id.diaryTitleView)
+        diaryTextView = findViewById(R.id.diaryTextView)
+        diaryImageView = findViewById(R.id.diaryImageView)
+        diaryDateView = findViewById(R.id.diaryDateView)
 
         // diaryData is String[] { date, name, uri.toString(), title }
         val diaryData = intent.getStringArrayExtra("diaryData") as Array<String>

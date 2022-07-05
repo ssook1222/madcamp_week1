@@ -23,11 +23,11 @@ import org.json.JSONTokener
 import java.io.File
 
 class AddImageActivity : AppCompatActivity() {
-    var addImageButton : Button?=null
-    var personName : TextView ?= null
+    private var addImageButton : Button?=null
+    private var personName : TextView ?= null
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
-    var photosList = arrayListOf<ChoicePhotos>()
-    var addPhotosList = arrayListOf<AddPhotos>()
+    private var photosList = arrayListOf<ChoicePhotos>()
+    private var addPhotosList = arrayListOf<AddPhotos>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +42,13 @@ class AddImageActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)  {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
-                resultLauncher!!.launch(intent);
+                resultLauncher!!.launch(intent)
             }
             else {
                 Toast.makeText(this,"갤러리 접근 권한을 허용해주세요.", Toast.LENGTH_LONG).show()
                 ActivityCompat.requestPermissions(
                     this,
-                    arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                     100
                 )
             }
@@ -59,8 +59,8 @@ class AddImageActivity : AppCompatActivity() {
         ) { result ->
             if (result.resultCode == RESULT_OK) {
                 val intent = result.data
-                val CallType = intent!!.getIntExtra("CallType", 0)
-                if (CallType == 0) {
+                val callType = intent!!.getIntExtra("CallType", 0)
+                if (callType == 0) {
 
                     val imageJsonFile = File(filesDir, "images.json")
                     if (!imageJsonFile.exists()) {
@@ -73,11 +73,11 @@ class AddImageActivity : AppCompatActivity() {
                         val imageJsonArray = JSONTokener(imageJsonString).nextValue() as JSONArray
                         for (i in 0 until imageJsonArray.length()) {
                             val name = imageJsonArray.getJSONObject(i).getString("contactName")
-                            val uri_raw = imageJsonArray.getJSONObject(i).getString("uri")
-                            val uri: Uri? = uri_raw.toUri()
+                            val uriRaw = imageJsonArray.getJSONObject(i).getString("uri")
+                            val uri: Uri = uriRaw.toUri()
 
                             photosList.add(ChoicePhotos(uri, name))
-                            addPhotosList.add(AddPhotos(name,uri.toString()))
+                            addPhotosList.add(AddPhotos(name, uri.toString()))
                         }
                     }
 

@@ -36,7 +36,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/sonagi_logo_small"></ImageView>
+                    android:background="@drawable/sonagi_logo_small" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                     android:fontFamily="@font/notosans_bold"
                     android:text="누구와의 추억인가요?"
                     android:textColor="#555555"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_marginLeft="20dp"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@drawable/underline"
-                    android:backgroundTint="#C5C5C5"></ImageView>
+                    android:backgroundTint="#C5C5C5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/notosans_bold"
                     android:text="언제의 추억인가요?"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@drawable/underline"
-                    android:backgroundTint="#C5C5C5"></ImageView>
+                    android:backgroundTint="#C5C5C5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -144,7 +144,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/notosans_bold"
                     android:text="추억에 이름을 붙여주세요."
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <EditText
                     android:id="@+id/addDiaryTitle"
@@ -157,13 +157,13 @@
                     android:layout_marginTop="-10dp"
                     android:hint="추억의 이름은?"
                     android:fontFamily="@font/notosans_regular"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@drawable/underline"
-                    android:backgroundTint="#C5C5C5"></ImageView>
+                    android:backgroundTint="#C5C5C5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -172,7 +172,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/notosans_bold"
                     android:text="그 사람과의 추억을 담은 사진을 골라주세요."
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addDiaryPhoto"
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="@drawable/underline"
-                    android:backgroundTint="#C5C5C5"></ImageView>
+                    android:backgroundTint="#C5C5C5" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/notosans_bold"
                     android:text="추억을 기록해주세요."
-                    android:textSize="16dp"></TextView>
+                    android:textSize="16dp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -214,7 +214,7 @@
                         android:hint="인연의 일부분을 적어주세요."
                         android:fontFamily="@font/notosans_regular"
                         android:inputType="textMultiLine"
-                        android:textSize="14dp"></EditText>
+                        android:textSize="14dp" />
                 </ScrollView>
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -224,7 +224,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/add_button"></androidx.appcompat.widget.AppCompatButton>
+                    android:background="@drawable/add_button" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>

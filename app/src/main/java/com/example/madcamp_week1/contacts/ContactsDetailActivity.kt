@@ -26,11 +26,11 @@ class ContactsDetailActivity : AppCompatActivity() {
 
         // data is String[] { contactName, phoneNumber, startDate }
         val data = intent.getStringArrayListExtra("contactDetailData")
-        detailName2 = findViewById<TextView>(R.id.detailName2)
-        detailName3 = findViewById<TextView>(R.id.detailName3)
-        detailName4 = findViewById<TextView>(R.id.detailName4)
-        detailPhone = findViewById<TextView>(R.id.detailPhone)
-        detailDate = findViewById<TextView>(R.id.detailDate)
+        detailName2 = findViewById(R.id.detailName2)
+        detailName3 = findViewById(R.id.detailName3)
+        detailName4 = findViewById(R.id.detailName4)
+        detailPhone = findViewById(R.id.detailPhone)
+        detailDate = findViewById(R.id.detailDate)
 
         detailName2.text = data?.get(0)  // name
         detailName3.text = data?.get(0)  // name
@@ -38,16 +38,16 @@ class ContactsDetailActivity : AppCompatActivity() {
         detailPhone.text = data?.get(1) // phone
         detailDate.text = data?.get(2)  // date
 
-        finishButton = findViewById<Button>(R.id.end_point)
+        finishButton = findViewById(R.id.end_point)
 
-        finishButton?.setOnClickListener {
+        finishButton.setOnClickListener {
             onClickDeleteContactButton(it)
         }
     }
 
-    fun onClickDeleteContactButton(view: View) {
+    private fun onClickDeleteContactButton(view: View) {
         val dh = DataHandler(applicationContext)
-        var contactsList = dh.getContactsList()
+        val contactsList = dh.getContactsList()
 
         val contactName = findViewById<TextView>(R.id.detailName2).text.toString()
         val filteredContactList = contactsList.filter { con -> con.contactName != contactName }

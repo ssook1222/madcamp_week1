@@ -1,15 +1,11 @@
 package com.example.madcamp_week1.diaries
 
 import android.content.Context
-import android.media.Image
-import android.net.Uri
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.google.gson.JsonElement
@@ -17,10 +13,8 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import java.lang.reflect.Type
-import java.util.*
-import kotlin.collections.ArrayList
 
-class DiaryAdapter(val context: Context, val itemList: ArrayList<Diary>) : RecyclerView.Adapter<DiaryAdapter.Holder>(), JsonSerializer<Diary> {
+class DiaryAdapter(val context: Context, private val itemList: ArrayList<Diary>) : RecyclerView.Adapter<DiaryAdapter.Holder>(), JsonSerializer<Diary> {
 
     interface OnItemClickListener {
         fun onTextClick(view: View, diary: Diary, pos: Int)

@@ -14,14 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
-import org.json.JSONArray
-import org.json.JSONTokener
 import java.io.File
 
 
 class PhotoFragment : Fragment(){
     lateinit var recyclerView : RecyclerView
-    var photosList = arrayListOf<Photos>()
+    private var photosList = arrayListOf<Photos>()
     lateinit var photoFragment: PhotoFragment
 
     override fun onCreateView(

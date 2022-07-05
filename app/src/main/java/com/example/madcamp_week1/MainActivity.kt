@@ -1,16 +1,15 @@
 package com.example.madcamp_week1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.contacts.ContactsFragment
 import com.example.madcamp_week1.diaries.DiaryFragment
 import com.example.madcamp_week1.photos.PhotoFragment
 import com.google.android.material.navigation.NavigationBarView
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     
-    public lateinit var mainActivity:MainActivity
+    lateinit var mainActivity:MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -28,28 +27,34 @@ class MainActivity : AppCompatActivity() {
         diaryFragment = DiaryFragment()
         photoFragment = PhotoFragment()
 
-        supportFragmentManager.beginTransaction().replace(R.id.container, contactsFragment!!).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.container, contactsFragment).commit()
 
-        var navigationBarView = findViewById<NavigationBarView>(R.id.menu)
+        val navigationBarView = findViewById<NavigationBarView>(R.id.menu)
         navigationBarView.itemIconTintList = null
 
         navigationBarView.setOnItemSelectedListener(
             NavigationBarView.OnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.contacts -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, contactsFragment!!)
+                        supportFragmentManager.beginTransaction().replace(R.id.container,
+                            contactsFragment
+                        )
                             .commit()
                         return@OnItemSelectedListener true
                     }
 
                     R.id.photos -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, photoFragment!!)
+                        supportFragmentManager.beginTransaction().replace(R.id.container,
+                            photoFragment
+                        )
                             .commit()
                         return@OnItemSelectedListener true
                     }
 
                     R.id.diary -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container, diaryFragment!!)
+                        supportFragmentManager.beginTransaction().replace(R.id.container,
+                            diaryFragment
+                        )
                             .commit()
                         return@OnItemSelectedListener true
                     }

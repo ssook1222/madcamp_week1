@@ -1,27 +1,22 @@
 package com.example.madcamp_week1.photos
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.net.toUri
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
-import org.json.JSONArray
-import org.json.JSONTokener
-import java.io.File
 
 class ShowPhotoActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
-    var choicePhotosList = arrayListOf<ChoicePhotos>()
-    var personName: TextView?=null
-    var addButton : Button?=null
+    private var choicePhotosList = arrayListOf<ChoicePhotos>()
+    private var personName: TextView?=null
+    private var addButton : Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +25,7 @@ class ShowPhotoActivity : AppCompatActivity() {
         val dh = DataHandler(applicationContext)
         choicePhotosList = dh.getChoicePhotosList()
 
-        recyclerView = findViewById(R.id.showRecyclerView) as RecyclerView
+        recyclerView = findViewById(R.id.showRecyclerView)
 
         val name = intent.getStringExtra("name")
         personName = findViewById(R.id.personName)

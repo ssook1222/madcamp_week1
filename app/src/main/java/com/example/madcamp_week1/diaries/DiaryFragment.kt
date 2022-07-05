@@ -14,7 +14,7 @@ import com.example.madcamp_week1.R
 
 class DiaryFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
-    var diaryList = arrayListOf<Diary>()
+    private var diaryList = arrayListOf<Diary>()
     lateinit var diaryFragment: DiaryFragment
 
     override fun onCreateView(
@@ -57,7 +57,4 @@ class DiaryFragment : Fragment() {
         return rootView
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }

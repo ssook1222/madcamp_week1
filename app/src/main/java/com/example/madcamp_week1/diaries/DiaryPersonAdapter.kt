@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import kotlin.collections.ArrayList
 
-class DiaryPersonAdapter(val itemList: ArrayList<String>) : RecyclerView.Adapter<DiaryPersonAdapter.Holder>(){
+class DiaryPersonAdapter(private val itemList: ArrayList<String>) : RecyclerView.Adapter<DiaryPersonAdapter.Holder>(){
 
     interface OnItemClickListener {
         fun onTextClick(view: View, name: String, pos: Int)
@@ -37,7 +37,7 @@ class DiaryPersonAdapter(val itemList: ArrayList<String>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(itemList[position])
+        holder.bind(itemList[position])
     }
 
     override fun getItemCount(): Int {

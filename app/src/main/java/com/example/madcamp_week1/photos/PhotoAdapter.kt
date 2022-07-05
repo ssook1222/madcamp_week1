@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 
-class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
+class PhotoAdapter(val context:Context, private val itemList: ArrayList<Photos>) :
     RecyclerView.Adapter<PhotoAdapter.Holder>(){
 
     interface OnItemClickListener{
@@ -28,9 +28,9 @@ class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
         return Holder(view)
     }
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val photoImage = itemView?.findViewById<ImageButton>(R.id.photoContactImage)
-        val photoName = itemView?.findViewById<TextView>(R.id.photoContactName)
-        val photoText = itemView?.findViewById<LinearLayout>(R.id.choice_text)
+        private val photoImage = itemView?.findViewById<ImageButton>(R.id.photoContactImage)
+        private val photoName = itemView?.findViewById<TextView>(R.id.photoContactName)
+        private val photoText = itemView?.findViewById<LinearLayout>(R.id.choice_text)
 
         fun bind (photo: Photos, context: Context) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)  {
@@ -48,7 +48,7 @@ class PhotoAdapter(val context:Context, val itemList: ArrayList<Photos>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(itemList[position], context)
+        holder.bind(itemList[position], context)
     }
 
     override fun getItemCount(): Int {

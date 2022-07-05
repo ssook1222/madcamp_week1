@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 
-class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePhotos>) :
+class ChoicePhotoAdapter(val context: Context, private val itemList: ArrayList<ChoicePhotos>) :
     RecyclerView.Adapter<ChoicePhotoAdapter.Holder>(){
     interface OnItemClickListener{
         fun onItemClick(view: View, choicePhotos: ChoicePhotos, pos: Int) //데이터 세이브
@@ -24,7 +24,7 @@ class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePho
     }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val choicePhotoImage = itemView?.findViewById<ImageView>(R.id.choice_image)
+        private val choicePhotoImage = itemView?.findViewById<ImageView>(R.id.choice_image)
 
         fun bind (choicePhotos: ChoicePhotos) {
             choicePhotoImage?.setImageURI(choicePhotos.uri)
@@ -35,7 +35,7 @@ class ChoicePhotoAdapter(val context: Context, val itemList: ArrayList<ChoicePho
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(itemList[position])
+        holder.bind(itemList[position])
     }
 
     override fun getItemCount(): Int {

@@ -2,25 +2,21 @@ package com.example.madcamp_week1.contacts
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week1.R
 import com.example.madcamp_week1.DataHandler
-import org.json.JSONArray
-import org.json.JSONTokener
-import java.io.File
+import com.example.madcamp_week1.R
 
 class ContactsFragment : Fragment() {
     lateinit var recyclerView : RecyclerView
-    var contactsList = arrayListOf<Contacts>()
-    var addContact: Button? = null
+    private var contactsList = arrayListOf<Contacts>()
+    private var addContact: Button? = null
     lateinit var contactsFragment: ContactsFragment
 
     override fun onCreateView(

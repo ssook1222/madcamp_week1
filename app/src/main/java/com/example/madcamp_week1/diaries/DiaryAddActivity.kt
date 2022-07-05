@@ -2,29 +2,23 @@ package com.example.madcamp_week1.diaries
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.cardview.widget.CardView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.contacts.ContactAdapter
 import com.example.madcamp_week1.contacts.Contacts
-import com.example.madcamp_week1.contacts.ContactsDetailActivity
 import com.google.gson.*
 import org.json.JSONArray
 import org.json.JSONTokener
@@ -35,12 +29,12 @@ import java.io.InputStream
 
 class DiaryAddActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
-    var contactsList = arrayListOf<Contacts>()
-    var nameList = arrayListOf<String>()
-    var newName : String =""
+    private var contactsList = arrayListOf<Contacts>()
+    private var nameList = arrayListOf<String>()
+    var newName: String = ""
 
-    var addDiaryPhotoButton: AppCompatButton? = null
-    var addDiaryButton: AppCompatButton? = null
+    private var addDiaryPhotoButton: AppCompatButton? = null
+    private var addDiaryButton: AppCompatButton? = null
 
     var uri: Uri? = null
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
@@ -50,10 +44,9 @@ class DiaryAddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_diary_add)
 
         val contactsJsonFile = File(filesDir, "contacts.json")
-        var contactsJsonString = ""
 
         if (contactsJsonFile.exists()) {
-            contactsJsonString = contactsJsonFile.readText()
+            val contactsJsonString = contactsJsonFile.readText()
 
             if (contactsList.size == 0 && contactsJsonString != "") {
                 val contactsJsonArray = JSONTokener(contactsJsonString).nextValue() as JSONArray
@@ -78,7 +71,7 @@ class DiaryAddActivity : AppCompatActivity() {
         val nameLayoutManager = LinearLayoutManager(this)
         nameLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
-        recyclerView = findViewById(R.id.addDiaryRecyclerView) as RecyclerView
+        recyclerView = findViewById(R.id.addDiaryRecyclerView)
         recyclerView.layoutManager = nameLayoutManager
 
         recyclerView.adapter = nameAdapter
@@ -105,10 +98,10 @@ class DiaryAddActivity : AppCompatActivity() {
                     uri = intent.data
 
                     //버튼 누르면 추가한 이미지로 바로 변경
-                    try{
-                        var ins:InputStream=contentResolver.openInputStream(uri!!)!!
-                        var drawable = Drawable.createFromStream(ins, uri.toString())
-                        addDiaryPhotoButton?.setBackground(drawable)
+                    try {
+                        val ins:InputStream = contentResolver.openInputStream(uri!!)!!
+                        val drawable = Drawable.createFromStream(ins, uri.toString())
+                        addDiaryPhotoButton?.background = drawable
                     } catch(e: FileNotFoundException ){
                         Toast.makeText(this, "이미지가 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
                     }
@@ -117,7 +110,7 @@ class DiaryAddActivity : AppCompatActivity() {
         }
     }
 
-    fun onClickAddDiaryButton(view: View) {
+    private fun onClickAddDiaryButton(view: View) {
         val dh = DataHandler(applicationContext)
         val diaryList = dh.getDiariesList()
 

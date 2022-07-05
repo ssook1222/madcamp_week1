@@ -1,19 +1,15 @@
 package com.example.madcamp_week1.contacts
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.DataHandler
 import com.example.madcamp_week1.MainActivity
 import com.example.madcamp_week1.R
 import com.google.gson.Gson
-import org.json.JSONArray
-import org.json.JSONTokener
-import java.io.File
 
 class ContactsAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +19,7 @@ class ContactsAddActivity : AppCompatActivity() {
 
     fun onClickAddContactButton(view: View) {
         val dh = DataHandler(applicationContext)
-        var contactsList = dh.getContactsList()
+        val contactsList = dh.getContactsList()
 
         val newContactPhone = findViewById<EditText>(R.id.add_phone).text.toString()
         val newContactName = findViewById<EditText>(R.id.add_name).text.toString()
