@@ -17,6 +17,7 @@
             android:exported="false" />
         <activity
             android:name=".contacts.ContactsDetailActivity"
+            android:hardwareAccelerated="false"
             android:exported="false" />
         <activity android:name=".photos.ShowPhotoDetailActivity" />
         <activity
