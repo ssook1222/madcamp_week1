@@ -6,6 +6,7 @@ import com.example.madcamp_week1.contacts.ContactsFragment
 import com.example.madcamp_week1.diaries.DiaryFragment
 import com.example.madcamp_week1.photos.PhotoFragment
 import com.google.android.material.navigation.NavigationBarView
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     
@@ -56,8 +57,10 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         )
+    }
 
-
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 }
